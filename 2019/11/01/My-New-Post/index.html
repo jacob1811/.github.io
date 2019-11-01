@@ -81,14 +81,14 @@
 
 
 
-<meta name="description" content="&#x2F;**  箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why? 区别： 1.更加简洁 2.箭头函数没有自己的this,它内部的this从属于函数所属上下文（call和apply也无法改变） 3.箭头函数没有arguments (类数组)只能基于 …arg 获取参数（数组） 4.箭头函数不能被new执行, 箭头函数没有自己的this, 没有prototype &#x2F;  123">
+<meta name="description" content="箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why?  区别：  1.更加简洁  2.箭头函数没有自己的this,它内部的this从属于函数所属上下文（call和apply也无法改变）  3.箭头函数没有arguments (类数组)只能基于 …arg 获取参数（数组）  4.箭头函数不能被new执行, 箭头函数没有自己的this, 没有prototype 123456">
 <meta property="og:type" content="article">
 <meta property="og:title" content="箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why?">
 <meta property="og:url" content="https:&#x2F;&#x2F;jacob1811.github.io&#x2F;blog&#x2F;2019&#x2F;11&#x2F;01&#x2F;My-New-Post&#x2F;index.html">
 <meta property="og:site_name" content="芸豆blog">
-<meta property="og:description" content="&#x2F;**  箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why? 区别： 1.更加简洁 2.箭头函数没有自己的this,它内部的this从属于函数所属上下文（call和apply也无法改变） 3.箭头函数没有arguments (类数组)只能基于 …arg 获取参数（数组） 4.箭头函数不能被new执行, 箭头函数没有自己的this, 没有prototype &#x2F;  123">
+<meta property="og:description" content="箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why?  区别：  1.更加简洁  2.箭头函数没有自己的this,它内部的this从属于函数所属上下文（call和apply也无法改变）  3.箭头函数没有arguments (类数组)只能基于 …arg 获取参数（数组）  4.箭头函数不能被new执行, 箭头函数没有自己的this, 没有prototype 123456">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-01T12:57:26.527Z">
+<meta property="og:updated_time" content="2019-11-01T13:03:27.425Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -257,7 +257,7 @@
   
   
 
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-categories" itemscope itemtype="http://schema.org/Article">
   
   
   
@@ -329,16 +329,7 @@
       
 
       
-        <p>/**</p>
-<ul>
-<li>箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why?</li>
-<li>区别：</li>
-<li>1.更加简洁</li>
-<li>2.箭头函数没有自己的this,它内部的this从属于函数所属上下文（call和apply也无法改变）</li>
-<li>3.箭头函数没有arguments (类数组)只能基于 …arg 获取参数（数组）</li>
-<li>4.箭头函数不能被new执行, 箭头函数没有自己的this, 没有prototype</li>
-<li>/</li>
-</ul>
+        <h3 id="箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why"><a href="#箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why" class="headerlink" title="箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why?"></a>箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why?</h3><p>  区别：<br>  1.更加简洁<br>  2.箭头函数没有自己的this,它内部的this从属于函数所属上下文（call和apply也无法改变）<br>  3.箭头函数没有arguments (类数组)只能基于 …arg 获取参数（数组）<br>  4.箭头函数不能被new执行, 箭头函数没有自己的this, 没有prototype</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const y = 7</span></span><br><span class="line"><span class="comment">//  function fn(x)&#123;</span></span><br><span class="line"><span class="comment">//   // const y = 7</span></span><br><span class="line"><span class="comment">//   return function(y)&#123;</span></span><br><span class="line"><span class="comment">//     console.log(x,y);</span></span><br><span class="line"><span class="comment">//     return x+y</span></span><br><span class="line"><span class="comment">//   &#125;(y)</span></span><br><span class="line"><span class="comment">//  &#125;</span></span><br><span class="line"><span class="comment">// //  console.log(fn(4))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  let fn1= x =&gt;&#123;</span></span><br><span class="line"><span class="comment">//    return (y =&gt; &#123;</span></span><br><span class="line"><span class="comment">//      console.log(111,x,y);</span></span><br><span class="line"><span class="comment">//      return x+y;</span></span><br><span class="line"><span class="comment">//     &#125;)(y)</span></span><br><span class="line"><span class="comment">//  &#125;</span></span><br><span class="line"><span class="comment">// let fn2 = x=&gt;y=&gt;x+y;</span></span><br><span class="line"><span class="comment">//  console.log(fn1(3));</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// * 2.箭头函数没有自己的this,它内部的this从属于函数所属上下文（call和apply也无法改变）</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// let obj = &#123;</span></span><br><span class="line"><span class="comment">//   name:'jack'</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// function fn1()&#123;</span></span><br><span class="line"><span class="comment">//   console.log(this.name);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// let fn2=()=&gt;&#123;</span></span><br><span class="line"><span class="comment">//   console.log(this.name);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// fn1();// undefined</span></span><br><span class="line"><span class="comment">// fn1.call(obj)//jack</span></span><br><span class="line"><span class="comment">// fn2() // undefined</span></span><br><span class="line"><span class="comment">// fn2.call(obj) // undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// document.body.onclick=function()&#123;</span></span><br><span class="line"><span class="comment">//   console.log(this); // this: body</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// document.body.onclick=()=&gt;&#123;</span></span><br><span class="line"><span class="comment">//   console.log(this); // this: windows </span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// document.body.onclick=function()&#123;</span></span><br><span class="line"><span class="comment">//   // this: body</span></span><br><span class="line"><span class="comment">//   arr.sort(function(a,b)&#123;</span></span><br><span class="line"><span class="comment">//     // this: window 回调函数中的this一般都是window</span></span><br><span class="line"><span class="comment">//     return a-b</span></span><br><span class="line"><span class="comment">//   &#125;) </span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// document.body.onclick=function()&#123;</span></span><br><span class="line"><span class="comment">//   // this: body</span></span><br><span class="line"><span class="comment">//   arr.sort((a,b)=&gt;&#123;</span></span><br><span class="line"><span class="comment">//     // this: body</span></span><br><span class="line"><span class="comment">//     return a-b</span></span><br><span class="line"><span class="comment">//   &#125;) </span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// JQ forEach</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">each</span>(<span class="params">arr,callback</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>,len=arr.length;i&lt;len;i++)&#123;</span><br><span class="line">     <span class="keyword">let</span> item = arr[i]</span><br><span class="line">     index=i</span><br><span class="line">    <span class="comment">//  callback(item,index) // this: window</span></span><br><span class="line">     <span class="keyword">let</span> flag = callback.call(arr,item,index)  <span class="comment">// this: arr</span></span><br><span class="line">     <span class="comment">//接收回调函数返回的结果 如果是false结束循环</span></span><br><span class="line">     <span class="keyword">if</span> (flag === <span class="literal">false</span>)&#123;</span><br><span class="line">       <span class="keyword">break</span></span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">each([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],<span class="function"><span class="keyword">function</span>(<span class="params">item,index</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="keyword">this</span>);   </span><br><span class="line">     <span class="built_in">console</span>.log(item,index);</span><br><span class="line">     <span class="keyword">if</span>(index&gt;=<span class="number">2</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// * 3.箭头函数没有arguments (类数组)只能基于 ...arg 获取参数（数组）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// let fn03 = ()=&gt;&#123;</span></span><br><span class="line"><span class="comment">//   console.log(arguments);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// let fn04 = (...arg)=&gt;&#123;</span></span><br><span class="line"><span class="comment">//   console.log(arg);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// fn03(10,20,30)</span></span><br><span class="line"><span class="comment">// fn04(10,20,30)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.x =<span class="number">100</span></span><br><span class="line">&#125;</span><br><span class="line">Fn.prototype.getX = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> Fn()</span><br><span class="line">f.getX()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> Fn01 = <span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.x = <span class="number">100</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.dir(Fn01)</span><br><span class="line"><span class="comment">// Fn01.prototype.getX = function()&#123;  // Cannot set property 'getX' of undefined</span></span><br><span class="line"><span class="comment">//   console.log(this.x);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// let f01 = new Fn01() // Fn01 is not a constructor</span></span><br><span class="line"><span class="comment">// f01.getX()</span></span><br></pre></td></tr></table></figure>
       
     </div>
@@ -427,8 +418,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -493,6 +493,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why"><span class="nav-number">1.</span> <span class="nav-text">箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why?</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
