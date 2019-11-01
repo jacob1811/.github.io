@@ -6,16 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://jacob1811.github.io/blog">
-  <title>Hexo</title>
+  <title>芸豆blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="芸豆blog">
 <meta property="og:url" content="https:&#x2F;&#x2F;jacob1811.github.io&#x2F;blog&#x2F;index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="芸豆blog">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="芸豆blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -45,7 +45,7 @@
 			<img src="" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">John Doe</a></h1>
+		  <h1 class="header-author"><a href="/">jacob</a></h1>
 		</hgroup>
 		
 
@@ -103,7 +103,7 @@
 				<img src="" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">John Doe</h1>
+			  <h1 class="header-author js-header-author">jacob</h1>
 			</hgroup>
 			
 			
@@ -158,7 +158,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/11/01/My-New-Post/">My New Post</a>
+      <a class="article-title" href="/blog/2019/11/01/My-New-Post/">箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why?</a>
     </h1>
   
 
@@ -171,7 +171,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>/**</p>
+<ul>
+<li>箭头函数与普通函数区别，普通函数可以通过new生成实例，箭头函数可以吗？why?</li>
+<li>区别：</li>
+<li>1.更加简洁</li>
+<li>2.箭头函数没有自己的this,它内部的this从属于函数所属上下文（call和apply也无法改变）</li>
+<li>3.箭头函数没有arguments (类数组)只能基于 …arg 获取参数（数组）</li>
+<li>4.箭头函数不能被new执行, 箭头函数没有自己的this, 没有prototype</li>
+<li>/</li>
+</ul>
+<p>// const y = 7<br>//  function fn(x){<br>//   // const y = 7<br>//   return function(y){<br>//     console.log(x,y);<br>//     return x+y<br>//   }(y)<br>//  }<br>// //  console.log(fn(4))</p>
+<p>//  let fn1= x =&gt;{<br>//    return (y =&gt; {<br>//      console.log(111,x,y);<br>//      return x+y;<br>//     })(y)<br>//  }<br>// let fn2 = x=&gt;y=&gt;x+y;<br>//  console.log(fn1(3));</p>
+<p>// * 2.箭头函数没有自己的this,它内部的this从属于函数所属上下文（call和apply也无法改变）</p>
+<p>// let obj = {<br>//   name:’jack’<br>// }<br>// function fn1(){<br>//   console.log(this.name);<br>// }<br>// let fn2=()=&gt;{<br>//   console.log(this.name);<br>// }<br>// fn1();// undefined<br>// fn1.call(obj)//jack<br>// fn2() // undefined<br>// fn2.call(obj) // undefined</p>
+<p>// document.body.onclick=function(){<br>//   console.log(this); // this: body<br>// }<br>// document.body.onclick=()=&gt;{<br>//   console.log(this); // this: windows<br>// }<br>// document.body.onclick=function(){<br>//   // this: body<br>//   arr.sort(function(a,b){<br>//     // this: window 回调函数中的this一般都是window<br>//     return a-b<br>//   })<br>// }</p>
+<p>// document.body.onclick=function(){<br>//   // this: body<br>//   arr.sort((a,b)=&gt;{<br>//     // this: body<br>//     return a-b<br>//   })<br>// }<br>// JQ forEach<br>function each(arr,callback){<br>  for(let i=0,len=arr.length;i&lt;len;i++){<br>     let item = arr[i]<br>     index=i<br>    //  callback(item,index) // this: window<br>     let flag = callback.call(arr,item,index)  // this: arr<br>     //接收回调函数返回的结果 如果是false结束循环<br>     if (flag === false){<br>       break<br>     }<br>  }<br>}<br>each([1,2,3,4,5],function(item,index){<br>     console.log(this);<br>     console.log(item,index);<br>     if(index&gt;=2){<br>      return false<br>     }<br>})</p>
+<p>// * 3.箭头函数没有arguments (类数组)只能基于 …arg 获取参数（数组）</p>
+<p>// let fn03 = ()=&gt;{<br>//   console.log(arguments);<br>// }<br>// let fn04 = (…arg)=&gt;{<br>//   console.log(arg);<br>// }<br>// fn03(10,20,30)<br>// fn04(10,20,30)</p>
+<p>function Fn(){<br>  this.x =100<br>}<br>Fn.prototype.getX = function(){<br>  console.log(this.x);<br>}<br>let f = new Fn()<br>f.getX()</p>
+<p>let Fn01 = ()=&gt;{<br>  this.x = 100<br>}<br>console.dir(Fn01)<br>// Fn01.prototype.getX = function(){  // Cannot set property ‘getX’ of undefined<br>//   console.log(this.x);<br>// }<br>// let f01 = new Fn01() // Fn01 is not a constructor<br>// f01.getX()</p>
+
       
 
       
@@ -298,7 +318,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 John Doe
+    		&copy; 2019 jacob
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
