@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://jacob1811.github.io/blog/"/>
-  <updated>2019-11-02T02:47:19.351Z</updated>
+  <updated>2019-11-10T13:02:17.699Z</updated>
   <id>https://jacob1811.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python-base</title>
+    <link href="https://jacob1811.github.io/blog/2019/11/10/python-base/"/>
+    <id>https://jacob1811.github.io/blog/2019/11/10/python-base/</id>
+    <published>2019-11-10T13:00:54.000Z</published>
+    <updated>2019-11-10T13:02:17.699Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://jacob1811.github.io/blog/categories/python/"/>
+    
+    
+      <category term="base" scheme="https://jacob1811.github.io/blog/tags/base/"/>
+    
+  </entry>
   
   <entry>
     <title>不想再看的 command</title>
