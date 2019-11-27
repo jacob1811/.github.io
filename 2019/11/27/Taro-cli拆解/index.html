@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/blog/atom.xml" title="芸豆blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="taro-cli 是怎么玩的？所有的工程化项目都一样，肯定需要CLI脚手架，Taro脚手架安装：  npm install -g @tarojs&#x2F;cli(yarn npx也可以)  安装后，恭喜你拥有了 taro 命令，主要负责项目初始化，编译，构建等 12345678910111213141516171819➜  taro-ui git:(master) ✗ taro👽 Taro v1.3.1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Taro-cli拆解">
+<meta property="og:url" content="https:&#x2F;&#x2F;jacob1811.github.io&#x2F;blog&#x2F;2019&#x2F;11&#x2F;27&#x2F;Taro-cli%E6%8B%86%E8%A7%A3&#x2F;index.html">
+<meta property="og:site_name" content="芸豆blog">
+<meta property="og:description" content="taro-cli 是怎么玩的？所有的工程化项目都一样，肯定需要CLI脚手架，Taro脚手架安装：  npm install -g @tarojs&#x2F;cli(yarn npx也可以)  安装后，恭喜你拥有了 taro 命令，主要负责项目初始化，编译，构建等 12345678910111213141516171819➜  taro-ui git:(master) ✗ taro👽 Taro v1.3.1">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;tva1.sinaimg.cn&#x2F;large&#x2F;006y8mN6ly1g82dhdr37hj311m0cyq42.jpg">
+<meta property="og:updated_time" content="2019-11-27T07:55:46.178Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;tva1.sinaimg.cn&#x2F;large&#x2F;006y8mN6ly1g82dhdr37hj311m0cyq42.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jacob1811.github.io/blog/2019/11/27/Taro-cli拆解/"/>
+
+
+
+
+
+  <title>Taro-cli拆解 | 芸豆blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">芸豆blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jacob1811.github.io/blog/blog/2019/11/27/Taro-cli%E6%8B%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jacob">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芸豆blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Taro-cli拆解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-27T15:55:41+08:00">
+                2019-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="taro-cli-是怎么玩的？"><a href="#taro-cli-是怎么玩的？" class="headerlink" title="taro-cli 是怎么玩的？"></a>taro-cli 是怎么玩的？</h3><p>所有的工程化项目都一样，肯定需要CLI脚手架，Taro脚手架安装：</p>
+<blockquote>
+<p>npm install -g @tarojs/cli<br>(yarn npx也可以)</p>
+</blockquote>
+<p>安装后，恭喜你拥有了 taro 命令，主要负责项目初始化，编译，构建等</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">➜  taro-ui git:(master) ✗ taro</span><br><span class="line">👽 Taro v1<span class="number">.3</span><span class="number">.19</span></span><br><span class="line"></span><br><span class="line">Usage: taro &lt;command&gt; [options]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -V, --version       output the version number</span><br><span class="line">  -h, --help          output usage information</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">  init [projectName]  Init a project <span class="keyword">with</span> <span class="keyword">default</span> templete</span><br><span class="line">  config &lt;cmd&gt;        Taro config</span><br><span class="line">  create              Create page <span class="keyword">for</span> project</span><br><span class="line">  build               Build a project <span class="keyword">with</span> options</span><br><span class="line">  update              Update packages <span class="keyword">of</span> taro</span><br><span class="line">  convert             Convert weapp to taro</span><br><span class="line">  info                Diagnostics Taro env info</span><br><span class="line">  doctor              Diagnose taro project</span><br><span class="line">  help [cmd]          display help <span class="keyword">for</span> [cmd]</span><br></pre></td></tr></table></figure>
+<h3 id="包管理与发布"><a href="#包管理与发布" class="headerlink" title="包管理与发布"></a>包管理与发布</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line">➜  taro-master tree -L <span class="number">2</span></span><br><span class="line">.</span><br><span class="line">├── CHANGELOG.md</span><br><span class="line">├── CONTRIBUTING.md</span><br><span class="line">├── LICENSE</span><br><span class="line">├── PLANS.md</span><br><span class="line">├── README.md</span><br><span class="line">├── build</span><br><span class="line">│   ├── docs-version.js</span><br><span class="line">│   └── docs.js</span><br><span class="line">├── docs</span><br><span class="line">│   ├── CONTRIBUTING.md</span><br><span class="line">│   ├── GETTING-STARTED.md</span><br><span class="line">│   ├── README.md</span><br><span class="line">│   ├── apis</span><br><span class="line">│   ├── <span class="keyword">async</span>-<span class="keyword">await</span>.md</span><br><span class="line">│   ├── before-dev-remind.md</span><br><span class="line">│   ├── best-practice.md</span><br><span class="line">│   ├── children.md</span><br><span class="line">│   ├── component-style.md</span><br><span class="line">│   ├── components</span><br><span class="line">│   ├── components-desc.md</span><br><span class="line">│   ├── composition.md</span><br><span class="line">│   ├── condition.md</span><br><span class="line">│   ├── config-detail.md</span><br><span class="line">│   ├── config.md</span><br><span class="line">│   ├── context.md</span><br><span class="line">│   ├── css-modules.md</span><br><span class="line">│   ├── debug.md</span><br><span class="line">│   ├── envs-debug.md</span><br><span class="line">│   ├── envs.md</span><br><span class="line">│   ├── event.md</span><br><span class="line">│   ├── functional-component.md</span><br><span class="line">│   ├── hooks.md</span><br><span class="line">│   ├── hybrid.md</span><br><span class="line">│   ├── jsx.md</span><br><span class="line">│   ├── list.md</span><br><span class="line">│   ├── mini-third-party.md</span><br><span class="line">│   ├── miniprogram-plugin.md</span><br><span class="line">│   ├── mobx.md</span><br><span class="line">│   ├── optimized-practice.md</span><br><span class="line">│   ├── project-config.md</span><br><span class="line">│   ├── props.md</span><br><span class="line">│   ├── quick-app.md</span><br><span class="line">│   ├── react-native.md</span><br><span class="line">│   ├── redux.md</span><br><span class="line">│   ├── ref.md</span><br><span class="line">│   ├── relations.md</span><br><span class="line">│   ├── render-props.md</span><br><span class="line">│   ├── report.md</span><br><span class="line">│   ├── router.md</span><br><span class="line">│   ├── size.md</span><br><span class="line">│   ├── spec-<span class="keyword">for</span>-taro.md</span><br><span class="line">│   ├── specials.md</span><br><span class="line">│   ├── state.md</span><br><span class="line">│   ├── <span class="keyword">static</span>-reference.md</span><br><span class="line">│   ├── taro-quickapp-manifest.md</span><br><span class="line">│   ├── taroize.md</span><br><span class="line">│   ├── team.md</span><br><span class="line">│   ├── template.md</span><br><span class="line">│   ├── tutorial.md</span><br><span class="line">│   ├── ui-lib.md</span><br><span class="line">│   └── wxcloud.md</span><br><span class="line">├── lerna.json      <span class="comment">// 包管理工具Lerna配置</span></span><br><span class="line">├── package.json</span><br><span class="line">├── packages</span><br><span class="line">│   ├── babel-plugin-transform-jsx-to-stylesheet</span><br><span class="line">│   ├── babel-plugin-transform-taroapi</span><br><span class="line">│   ├── css-to-react-native</span><br><span class="line">│   ├── eslint-config-taro</span><br><span class="line">│   ├── eslint-plugin-taro</span><br><span class="line">│   ├── postcss-plugin-constparse</span><br><span class="line">│   ├── postcss-pxtransform</span><br><span class="line">│   ├── postcss-unit-transform</span><br><span class="line">│   ├── stylelint-config-taro-rn</span><br><span class="line">│   ├── stylelint-taro-rn</span><br><span class="line">│   ├── taro</span><br><span class="line">│   ├── taro-alipay</span><br><span class="line">│   ├── taro-<span class="keyword">async</span>-<span class="keyword">await</span></span><br><span class="line">│   ├── taro-cli</span><br><span class="line">│   ├── taro-components</span><br><span class="line">│   ├── taro-components-qa</span><br><span class="line">│   ├── taro-components-rn</span><br><span class="line">│   ├── taro-h5</span><br><span class="line">│   ├── taro-jd</span><br><span class="line">│   ├── taro-mobx</span><br><span class="line">│   ├── taro-mobx-common</span><br><span class="line">│   ├── taro-mobx-h5</span><br><span class="line">│   ├── taro-mobx-rn</span><br><span class="line">│   ├── taro-plugin-babel</span><br><span class="line">│   ├── taro-plugin-csso</span><br><span class="line">│   ├── taro-plugin-less</span><br><span class="line">│   ├── taro-plugin-sass</span><br><span class="line">│   ├── taro-plugin-stylus</span><br><span class="line">│   ├── taro-plugin-typescript</span><br><span class="line">│   ├── taro-plugin-uglifyjs</span><br><span class="line">│   ├── taro-qq</span><br><span class="line">│   ├── taro-quickapp</span><br><span class="line">│   ├── taro-redux</span><br><span class="line">│   ├── taro-redux-h5</span><br><span class="line">│   ├── taro-redux-rn</span><br><span class="line">│   ├── taro-rn</span><br><span class="line">│   ├── taro-rn-runner</span><br><span class="line">│   ├── taro-router</span><br><span class="line">│   ├── taro-router-rn</span><br><span class="line">│   ├── taro-swan</span><br><span class="line">│   ├── taro-transformer-wx</span><br><span class="line">│   ├── taro-tt</span><br><span class="line">│   ├── taro-utils</span><br><span class="line">│   ├── taro-weapp</span><br><span class="line">│   ├── taro-webpack-runner</span><br><span class="line">│   ├── taro-<span class="keyword">with</span>-weapp</span><br><span class="line">│   └── taroize</span><br><span class="line">├── website</span><br><span class="line">│   ├── core</span><br><span class="line">│   ├── i18n</span><br><span class="line">│   ├── pages</span><br><span class="line">│   ├── sidebars.json</span><br><span class="line">│   ├── siteConfig.js</span><br><span class="line">│   ├── <span class="keyword">static</span></span><br><span class="line">│   ├── versioned_docs</span><br><span class="line">│   ├── versioned_sidebars</span><br><span class="line">│   └── versions.json</span><br><span class="line">└── yarn.lock</span><br></pre></td></tr></table></figure>
+<p>packages 目录下十几个包中，最常用的项目初始化与构建的命令行工具 taro-cli 就是其中一个。在 Taro 工程根目录运行 lerna publish 命令之后，lerna.json 里面配置好的所有的包会被发布到 npm 上去。</p>
+<h3 id="lerna"><a href="#lerna" class="headerlink" title="lerna"></a>lerna</h3><p><a href="https://github.com/lerna/lerna" target="_blank" rel="noopener">lerna github</a><br><a href="https://lerna.js.org/" target="_blank" rel="noopener">文档</a></p>
+<p>安装</p>
+<blockquote>
+<p>npm install –global lerna</p>
+</blockquote>
+<p>初始化项目仓库</p>
+<blockquote>
+<p>git init lerna-repo &amp;&amp; cd lerna-repo</p>
+</blockquote>
+<p>lerna初始化</p>
+<blockquote>
+<p>lerna init</p>
+</blockquote>
+<h4 id="taro-cli-包目录结构"><a href="#taro-cli-包目录结构" class="headerlink" title="taro-cli 包目录结构"></a>taro-cli 包目录结构</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br></pre></td><td class="code"><pre><span class="line">➜  taro-cli tree</span><br><span class="line">.</span><br><span class="line">├── CHANGELOG.md</span><br><span class="line">├── __tests__</span><br><span class="line">│   ├── __snapshots__</span><br><span class="line">│   │   └── rn.test.js.snap</span><br><span class="line">│   ├── mocks</span><br><span class="line">│   │   ├── app.js</span><br><span class="line">│   │   ├── config</span><br><span class="line">│   │   │   ├── dev.js</span><br><span class="line">│   │   │   ├── index.js</span><br><span class="line">│   │   │   └── prod.js</span><br><span class="line">│   │   └── page.js</span><br><span class="line">│   └── rn.test.js</span><br><span class="line">├── bin    <span class="comment">// 命令行</span></span><br><span class="line">│   ├── taro        <span class="comment">// taro 命令</span></span><br><span class="line">│   ├── taro-build  <span class="comment">// taro build命令</span></span><br><span class="line">│   ├── taro-config   <span class="comment">// Taro config</span></span><br><span class="line">│   ├── taro-convert  <span class="comment">// Convert weapp to taro</span></span><br><span class="line">│   ├── taro-create   <span class="comment">// Create page for project</span></span><br><span class="line">│   ├── taro-doctor   <span class="comment">// Diagnose taro project</span></span><br><span class="line">│   ├── taro-info    <span class="comment">// Diagnostics Taro env info</span></span><br><span class="line">│   ├── taro-init   <span class="comment">// taro init命令  Init a project with default templete</span></span><br><span class="line">│   └── taro-update <span class="comment">// taro update命令 Update packages of taro</span></span><br><span class="line">├── global.d.ts</span><br><span class="line">├── index.js</span><br><span class="line">├── jest.config.js</span><br><span class="line">├── package.json</span><br><span class="line">├── scripts</span><br><span class="line">│   └── prepublish.js</span><br><span class="line">├── src</span><br><span class="line">│   ├── build.ts            <span class="comment">// taro build 命令调用，根据 type 类型调用不同的脚本</span></span><br><span class="line">│   ├── config</span><br><span class="line">│   │   ├── babel.ts        <span class="comment">// Babel 配置</span></span><br><span class="line">│   │   ├── babylon.ts      <span class="comment">// JavaScript 解析器 babylon 配置</span></span><br><span class="line">│   │   ├── browser_list.ts <span class="comment">// autoprefixer browsers 配置</span></span><br><span class="line">│   │   ├── index.ts        <span class="comment">// 目录名及入口文件名相关配置</span></span><br><span class="line">│   │   ├── manifest.default.json</span><br><span class="line">│   │   ├── rn-stylelint.json</span><br><span class="line">│   │   ├── tsconfig.json</span><br><span class="line">│   │   └── uglify.ts</span><br><span class="line">│   ├── convertor</span><br><span class="line">│   │   ├── helper.ts</span><br><span class="line">│   │   └── index.ts</span><br><span class="line">│   ├── create</span><br><span class="line">│   │   ├── creator.ts</span><br><span class="line">│   │   ├── fetchTemplate.ts</span><br><span class="line">│   │   ├── init.ts</span><br><span class="line">│   │   ├── page.ts</span><br><span class="line">│   │   └── project.ts         <span class="comment">// taro init 命令调用，初始化项目 </span></span><br><span class="line">│   ├── doctor</span><br><span class="line">│   │   ├── abilityXMLValidator.ts</span><br><span class="line">│   │   ├── configSchema.ts</span><br><span class="line">│   │   ├── configValidator.ts</span><br><span class="line">│   │   ├── eslintValidator.ts</span><br><span class="line">│   │   ├── index.ts</span><br><span class="line">│   │   ├── interface.ts</span><br><span class="line">│   │   ├── joi2desc.ts</span><br><span class="line">│   │   ├── packageValidator.ts</span><br><span class="line">│   │   ├── recommandValidator.ts</span><br><span class="line">│   │   └── validatorEslintrc.ts</span><br><span class="line">│   ├── h5                <span class="comment">// 构建h5 平台代码</span></span><br><span class="line">│   │   ├── constants.ts</span><br><span class="line">│   │   ├── helper.ts</span><br><span class="line">│   │   └── index.ts</span><br><span class="line">│   ├── index.ts</span><br><span class="line">│   ├── jdreact</span><br><span class="line">│   │   ├── convert_to_jdreact.ts</span><br><span class="line">│   │   ├── pkg</span><br><span class="line">│   │   ├── template</span><br><span class="line">│   │   │   ├── JDReact.version</span><br><span class="line">│   │   │   └── JDReact.web.js</span><br><span class="line">│   │   └── test.js</span><br><span class="line">│   ├── mini</span><br><span class="line">│   │   ├── astProcess.ts</span><br><span class="line">│   │   ├── compileScript.ts</span><br><span class="line">│   │   ├── compileStyle.ts</span><br><span class="line">│   │   ├── component.ts</span><br><span class="line">│   │   ├── constants.ts</span><br><span class="line">│   │   ├── entry.ts</span><br><span class="line">│   │   ├── helper.ts</span><br><span class="line">│   │   ├── index.ts</span><br><span class="line">│   │   ├── interface.ts</span><br><span class="line">│   │   ├── native.ts</span><br><span class="line">│   │   ├── page.ts</span><br><span class="line">│   │   └── watch.ts</span><br><span class="line">│   ├── plugin.ts</span><br><span class="line">│   ├── quickapp</span><br><span class="line">│   │   ├── style</span><br><span class="line">│   │   │   ├── declaration</span><br><span class="line">│   │   │   │   ├── animation</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── background</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── border</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── box</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── color</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── component</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── dimension</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── flexbox</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── font</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── index.ts</span><br><span class="line">│   │   │   │   ├── list</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── margin</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── padding</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── position</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── text</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── transform</span><br><span class="line">│   │   │   │   │   └── transform.ts</span><br><span class="line">│   │   │   │   ├── transition</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   └── visibility</span><br><span class="line">│   │   │   │       └── index.ts</span><br><span class="line">│   │   │   ├── index.ts</span><br><span class="line">│   │   │   ├── selector</span><br><span class="line">│   │   │   │   └── index.ts</span><br><span class="line">│   │   │   └── util.ts</span><br><span class="line">│   │   ├── style-rewriter.ts</span><br><span class="line">│   │   ├── template</span><br><span class="line">│   │   │   ├── constant.ts</span><br><span class="line">│   │   │   ├── node.ts</span><br><span class="line">│   │   │   ├── parser.ts</span><br><span class="line">│   │   │   ├── serialize.ts</span><br><span class="line">│   │   │   ├── tag</span><br><span class="line">│   │   │   │   ├── index.ts</span><br><span class="line">│   │   │   │   ├── span</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── taro-camera</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── taro-canvas</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── taro-image</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── taro-input</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── taro-label</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── taro-map</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── taro-picker</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── taro-textarea</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   ├── taro-video</span><br><span class="line">│   │   │   │   │   └── index.ts</span><br><span class="line">│   │   │   │   └── text</span><br><span class="line">│   │   │   │       └── index.ts</span><br><span class="line">│   │   │   └── utils.ts</span><br><span class="line">│   │   └── template-rewriter.ts</span><br><span class="line">│   ├── rn</span><br><span class="line">│   │   ├── StyleSheet</span><br><span class="line">│   │   │   ├── ColorPropType.ts</span><br><span class="line">│   │   │   ├── ImageResizeMode.ts</span><br><span class="line">│   │   │   ├── ImageStylePropTypes.ts</span><br><span class="line">│   │   │   ├── LayoutPropTypes.ts</span><br><span class="line">│   │   │   ├── ShadowPropTypesIOS.ts</span><br><span class="line">│   │   │   ├── StyleSheetValidation.ts</span><br><span class="line">│   │   │   ├── TextStylePropTypes.ts</span><br><span class="line">│   │   │   ├── TransformPropTypes.ts</span><br><span class="line">│   │   │   ├── ViewStylePropTypes.ts</span><br><span class="line">│   │   │   ├── deprecatedPropType.ts</span><br><span class="line">│   │   │   ├── index.ts</span><br><span class="line">│   │   │   └── normalizeColor.ts</span><br><span class="line">│   │   ├── styleProcess.ts</span><br><span class="line">│   │   └── transformJS.ts</span><br><span class="line">│   ├── rn.ts   <span class="comment">// 构建React Native 平台代码</span></span><br><span class="line">│   ├── taro-config</span><br><span class="line">│   │   └── index.ts</span><br><span class="line">│   ├── ui.ts   <span class="comment">// 一系列工具函数</span></span><br><span class="line">│   └── util</span><br><span class="line">│       ├── astConvert.ts</span><br><span class="line">│       ├── constants.ts</span><br><span class="line">│       ├── dowload.ts</span><br><span class="line">│       ├── hash.ts</span><br><span class="line">│       ├── index.ts</span><br><span class="line">│       ├── npm.ts</span><br><span class="line">│       ├── npmExact.ts</span><br><span class="line">│       ├── resolve_npm_files.ts</span><br><span class="line">│       └── types.ts</span><br><span class="line">├── templates    <span class="comment">// 脚手架模版</span></span><br><span class="line">│   └── <span class="keyword">default</span></span><br><span class="line">│       ├── _editorconfig</span><br><span class="line">│       ├── _eslintrc</span><br><span class="line">│       ├── _gitignore</span><br><span class="line">│       ├── _npmrc</span><br><span class="line">│       ├── config</span><br><span class="line">│       │   ├── dev.js</span><br><span class="line">│       │   ├── index.js</span><br><span class="line">│       │   └── prod.js</span><br><span class="line">│       ├── global.d.ts</span><br><span class="line">│       ├── package.json</span><br><span class="line">│       ├── project.config.json</span><br><span class="line">│       ├── src         <span class="comment">// 初始化文件及目录，copy模版等</span></span><br><span class="line">│       │   ├── app.css</span><br><span class="line">│       │   ├── app.jsx</span><br><span class="line">│       │   ├── index.html</span><br><span class="line">│       │   └── pages</span><br><span class="line">│       │       └── index</span><br><span class="line">│       │           ├── index.css</span><br><span class="line">│       │           └── index.jsx</span><br><span class="line">│       ├── template_creator.js</span><br><span class="line">│       └── tsconfig.json</span><br><span class="line">├── tsconfig.json</span><br><span class="line">├── tslint.json</span><br><span class="line">└── yarn.lock</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="taro-init"><a href="#taro-init" class="headerlink" title="taro init:"></a>taro init:</h3><p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g82dhdr37hj311m0cyq42.jpg" alt=""></p>
+<h3 id="taro-命令入口"><a href="#taro-命令入口" class="headerlink" title="taro 命令入口"></a>taro 命令入口</h3><p>那么 taro 命令是怎样添加进去的呢，其原因在于 package.json 里面的 bin 字段；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_moudle/taro-cli/package.json</span></span><br><span class="line"><span class="string">"bin"</span>: &#123;</span><br><span class="line">    <span class="string">"taro"</span>: <span class="string">"bin/taro"</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<p>taro 命令对应的可执行文件为 bin/taro<br>npm 会寻找这个文件，在 [prefix]/bin 目录下建立符号链接。在上面的例子中，taro会建立符号链接 [prefix]/bin/taro。由于 [prefix]/bin 目录会在运行时加入系统的 PATH 变量，因此在运行 npm 时，就可以不带路径，直接通过命令来调用这些脚本。</p>
+<p>关于prefix，可以通过npm config get prefix获取。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm config <span class="keyword">get</span> prefix</span><br><span class="line">/usr/local</span><br></pre></td></tr></table></figure>
+
+<p>通过下列命令可以更加清晰的看到它们之间的符号链接：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls -al <span class="string">`which taro`</span></span><br><span class="line">lrwxr-xr-x  <span class="number">1</span> chengshuai  admin  <span class="number">40</span>  <span class="number">6</span> <span class="number">15</span> <span class="number">10</span>:<span class="number">51</span> /usr/local/bin/taro -&gt; ../lib/node_modules/@tarojs/cli/bin/taro</span><br></pre></td></tr></table></figure>
+
+<h3 id="taro-子命令"><a href="#taro-子命令" class="headerlink" title="taro 子命令"></a>taro 子命令</h3><p>上面我们已经知道 taro-cli 包安装之后，taro 命令是怎么和 /bin/taro 文件相关联起来的， 那 taro init 和 taro build 又是怎样和对应的文件关联起来的呢？</p>
+<p><a href="https://github.com/tj/commander.js/" target="_blank" rel="noopener">tj/commander.js</a><br>命令行接口全面的解决方案，灵感来自于 Ruby’s commander。可以自动的解析命令和参数，合并多选项，处理短参等等，功能强大，上手简单</p>
+<h4 id="命令关联与参数解析"><a href="#命令关联与参数解析" class="headerlink" title="命令关联与参数解析"></a>命令关联与参数解析</h4><p>commander 支持 git 风格的子命令处理，可以根据子命令自动引导到以特定格式命名的命令执行文件，文件名的格式是 [command]-[subcommand]，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">taro init =&gt; taro-init</span><br><span class="line">taro build =&gt; taro-build</span><br></pre></td></tr></table></figure>
+<p>/bin/taro 文件内容不多，核心代码也就那几行 .command() 命令：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /usr/bin/env node</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> program = <span class="built_in">require</span>(<span class="string">'commander'</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; getPkgVersion, printPkgVersion &#125; = <span class="built_in">require</span>(<span class="string">'../dist/util'</span>)</span><br><span class="line"></span><br><span class="line">printPkgVersion()</span><br><span class="line"></span><br><span class="line">program</span><br><span class="line">  .version(getPkgVersion())</span><br><span class="line">  .usage(<span class="string">'&lt;command&gt; [options]'</span>)</span><br><span class="line">  .command(<span class="string">'init [projectName]'</span>, <span class="string">'Init a project with default templete'</span>)</span><br><span class="line">  .command(<span class="string">'config &lt;cmd&gt;'</span>, <span class="string">'Taro config'</span>)</span><br><span class="line">  .command(<span class="string">'create'</span>, <span class="string">'Create page for project'</span>)</span><br><span class="line">  .command(<span class="string">'build'</span>, <span class="string">'Build a project with options'</span>)</span><br><span class="line">  .command(<span class="string">'update'</span>, <span class="string">'Update packages of taro'</span>)</span><br><span class="line">  .command(<span class="string">'convert'</span>, <span class="string">'Convert weapp to taro'</span>)</span><br><span class="line">  .command(<span class="string">'info'</span>, <span class="string">'Diagnostics Taro env info'</span>)</span><br><span class="line">  .command(<span class="string">'doctor'</span>, <span class="string">'Diagnose taro project'</span>)</span><br><span class="line">  .parse(process.argv)</span><br></pre></td></tr></table></figure>
+<h4 id="command方法"><a href="#command方法" class="headerlink" title="command方法"></a>command方法</h4><blockquote>
+<p>用法：.command(‘init <path>‘, ‘description’)<br>command的 原则上他可以接受三个参数，第一个为命令定义，第二个命令描述，第三个为命令辅助修饰对象。</p>
+</blockquote>
+<ul>
+<li><p>第一个参数中可以使用 &lt;&gt; 或者 [] 修饰命令参数</p>
+</li>
+<li><p>第二个参数可选。</p>
+<ol>
+<li>当没有第二个参数时，commander.js 将返回 Command 对象，若有第二个参数，将返回原型对象。</li>
+<li>当带有第二个参数，并且没有显示调用 action(fn) 时，则将会使用子命令模式。</li>
+<li>所谓子命令模式即，./pm，./pm-install，./pm-search等。这些子命令跟主命令在不同的文件中。</li>
+</ol>
+</li>
+<li><p>第三个参数一般不用，它可以设置是否显示的使用子命令模式</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2019/11/27/Taro%E4%BB%8B%E7%BB%8D/" rel="next" title="Taro介绍">
+                <i class="fa fa-chevron-left"></i> Taro介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">jacob</p>
+              <p class="site-description motion-element" itemprop="description">我的地盘，我做主</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/blog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://jacob1811.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:jacob1811@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#taro-cli-是怎么玩的？"><span class="nav-number">1.</span> <span class="nav-text">taro-cli 是怎么玩的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包管理与发布"><span class="nav-number">2.</span> <span class="nav-text">包管理与发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lerna"><span class="nav-number">3.</span> <span class="nav-text">lerna</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#taro-cli-包目录结构"><span class="nav-number">3.1.</span> <span class="nav-text">taro-cli 包目录结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#taro-init"><span class="nav-number">4.</span> <span class="nav-text">taro init:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#taro-命令入口"><span class="nav-number">5.</span> <span class="nav-text">taro 命令入口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#taro-子命令"><span class="nav-number">6.</span> <span class="nav-text">taro 子命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命令关联与参数解析"><span class="nav-number">6.1.</span> <span class="nav-text">命令关联与参数解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#command方法"><span class="nav-number">6.2.</span> <span class="nav-text">command方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jacob</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="react,Taro," />
+
+
+
+
+
+  <link rel="alternate" href="/blog/atom.xml" title="芸豆blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Taro环境要求 node &amp;gt;=8.0.0  CLI 工具安装123456# 使用 npm 安装 CLI$ npm install -g @tarojs&#x2F;cli# OR 使用 yarn 安装 CLI$ yarn global add @tarojs&#x2F;cli# OR 安装了 cnpm，使用 cnpm 安装 CLI$ cnpm install -g @tarojs&#x2F;cli  项目初始化123$">
+<meta name="keywords" content="react,Taro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Taro快速开始">
+<meta property="og:url" content="https:&#x2F;&#x2F;jacob1811.github.io&#x2F;blog&#x2F;2019&#x2F;11&#x2F;27&#x2F;Taro%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B&#x2F;index.html">
+<meta property="og:site_name" content="芸豆blog">
+<meta property="og:description" content="Taro环境要求 node &amp;gt;=8.0.0  CLI 工具安装123456# 使用 npm 安装 CLI$ npm install -g @tarojs&#x2F;cli# OR 使用 yarn 安装 CLI$ yarn global add @tarojs&#x2F;cli# OR 安装了 cnpm，使用 cnpm 安装 CLI$ cnpm install -g @tarojs&#x2F;cli  项目初始化123$">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-27T07:54:07.749Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jacob1811.github.io/blog/2019/11/27/Taro快速开始/"/>
+
+
+
+
+
+  <title>Taro快速开始 | 芸豆blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">芸豆blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jacob1811.github.io/blog/blog/2019/11/27/Taro%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jacob">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芸豆blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Taro快速开始</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-27T15:53:47+08:00">
+                2019-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Taro"><a href="#Taro" class="headerlink" title="Taro"></a>Taro</h2><h3 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h3><blockquote>
+<p>node &gt;=8.0.0</p>
+</blockquote>
+<h3 id="CLI-工具安装"><a href="#CLI-工具安装" class="headerlink" title="CLI 工具安装"></a>CLI 工具安装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 使用 npm 安装 CLI</span><br><span class="line">$ npm install -g @tarojs/cli</span><br><span class="line"># OR 使用 yarn 安装 CLI</span><br><span class="line">$ yarn global add @tarojs/cli</span><br><span class="line"># OR 安装了 cnpm，使用 cnpm 安装 CLI</span><br><span class="line">$ cnpm install -g @tarojs/cli</span><br></pre></td></tr></table></figure>
+
+<h3 id="项目初始化"><a href="#项目初始化" class="headerlink" title="项目初始化"></a>项目初始化</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ taro init myApp</span><br><span class="line">cd myApp</span><br><span class="line">yarn</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># yarn</span><br><span class="line">$ yarn dev:weapp</span><br><span class="line">$ yarn build:weapp</span><br><span class="line"># npm script</span><br><span class="line">$ npm run dev:weapp</span><br><span class="line">$ npm run build:weapp</span><br><span class="line"># 仅限全局安装</span><br><span class="line">$ taro build --type weapp --watch</span><br><span class="line">$ taro build --type weapp</span><br><span class="line"># npx 用户也可以使用</span><br><span class="line">$ npx taro build --type weapp --watch</span><br><span class="line">$ npx taro build --type weapp</span><br></pre></td></tr></table></figure>
+<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">├── config                 配置目录</span><br><span class="line">|   ├── dev.js             开发时配置</span><br><span class="line">|   ├── index.js           默认配置</span><br><span class="line">|   └── prod.js            打包时配置</span><br><span class="line">├── src                    源码目录</span><br><span class="line">|   ├── components         公共组件目录</span><br><span class="line">|   ├── pages              页面文件目录</span><br><span class="line">|   |   ├── index          index 页面目录</span><br><span class="line">|   |   |   ├── banner     页面 index 私有组件</span><br><span class="line">|   |   |   ├── index.js   index 页面逻辑</span><br><span class="line">|   |   |   └── index.css  index 页面样式</span><br><span class="line">|   ├── utils              公共方法库</span><br><span class="line">|   ├── app.css            项目总通用样式</span><br><span class="line">|   └── app.js             项目入口文件</span><br><span class="line">└── package.json</span><br></pre></td></tr></table></figure>
+<h4 id="文件命名"><a href="#文件命名" class="headerlink" title="文件命名"></a>文件命名</h4><blockquote>
+<p>Taro 中普通 JS/TS 文件以小写字母命名，多个单词以下划线连接，例如 util.js、util_helper.js</p>
+</blockquote>
+<blockquote>
+<p>Taro 组件文件命名遵循 Pascal 命名法，例如 ReservationCard.jsx</p>
+</blockquote>
+<h4 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h4><p><a href="https://taro-docs.jd.com/taro/docs/best-practice.html" target="_blank" rel="noopener">https://taro-docs.jd.com/taro/docs/best-practice.html</a></p>
+<h4 id="JSX-支持程度说明"><a href="#JSX-支持程度说明" class="headerlink" title="JSX 支持程度说明"></a>JSX 支持程度说明</h4><ol>
+<li><p><a href="https://github.com/NervJS/taro/blob/master/packages/eslint-plugin-taro/docs/manipulate-jsx-as-array.md" target="_blank" rel="noopener">不能使用 Array#map 之外的方法操作 JSX 数组</a></p>
+</li>
+<li><p><a href="https://github.com/NervJS/taro/blob/master/packages/eslint-plugin-taro/docs/no-jsx-in-class-method.md" target="_blank" rel="noopener">暂不支持在 render() 之外的方法定义 JSX</a></p>
+</li>
+<li><p><a href="https://github.com/NervJS/taro/blob/master/packages/eslint-plugin-taro/docs/no-spread-in-props.md" target="_blank" rel="noopener">不能在 JSX 参数中使用对象展开符 </a></p>
+</li>
+<li><p><a href="https://github.com/NervJS/taro/blob/master/packages/eslint-plugin-taro/docs/no-stateless-function.md" target="_blank" rel="noopener">不支持无状态组件</a></p>
+</li>
+</ol>
+<h4 id="最佳编码方式"><a href="#最佳编码方式" class="headerlink" title="最佳编码方式"></a>最佳编码方式</h4><h4 id="组件样式说明"><a href="#组件样式说明" class="headerlink" title="组件样式说明"></a>组件样式说明</h4><h5 id="给组件设置-defaultProps"><a href="#给组件设置-defaultProps" class="headerlink" title="给组件设置 defaultProps"></a>给组件设置 defaultProps</h5><blockquote>
+<p>在微信小程序端的自定义组件中，只有在 properties 中指定的属性，才能从父组件传入并接收</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">  properties: &#123;</span><br><span class="line">    myProperty: &#123; // 属性名</span><br><span class="line">      type: String, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）</span><br><span class="line">      value: &apos;&apos;, // 属性初始值（可选），如果未指定则会根据类型选择一个</span><br><span class="line">      observer: function (newVal, oldVal, changedPath) &#123;</span><br><span class="line">         // 属性被改变时执行的函数（可选），也可以写成在 methods 段中定义的方法名字符串, 如：&apos;_propertyChange&apos;</span><br><span class="line">         // 通常 newVal 就是新设置的数据， oldVal 是旧数据</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    myProperty2: String // 简化的定义方式</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="组件传递函数属性名以-on-开头"><a href="#组件传递函数属性名以-on-开头" class="headerlink" title="组件传递函数属性名以 on 开头"></a>组件传递函数属性名以 on 开头</h5><blockquote>
+<p>在 v1.3.0-beta.0 之后，自定义组件间的事件传递可以不用 on 开头，但内置组件的事件依然是以 on 开头的，为了一致性我们仍然推荐你以 on 开头命名你的事件。</p>
+</blockquote>
+<p>在 Taro 中，父组件要往子组件传递函数，属性名必须以 on 开头</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 调用 Custom 组件，传入 handleEvent 函数，属性名为 onTrigger</span><br><span class="line">class Parent extends Component &#123;</span><br><span class="line"></span><br><span class="line">  handleEvent () &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;Custom onTrigger=&#123;this.handleEvent&#125;&gt;&lt;/Custom&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是因为，微信小程序端组件化是不能直接传递函数类型给子组件的，在 Taro 中是借助组件的事件机制来实现这一特性，而小程序中传入事件的时候属性名写法为 bindmyevent 或者 bind:myevent</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 当自定义组件触发 myevent 事件时，调用 onMyEvent 方法 --&gt;</span><br><span class="line">&lt;component-tag-name bindmyevent=<span class="string">"onMyEvent"</span> /&gt;</span><br><span class="line">&lt;!-- 或者可以写成 --&gt;</span><br><span class="line">&lt;component-tag-name bind:myevent=<span class="string">"onMyEvent"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>所以 Taro 中约定组件传递函数属性名以 on 开头，同时这也和内置组件的事件绑定写法保持一致了。</p>
+<h5 id="小程序端不要在组件中打印传入的函数"><a href="#小程序端不要在组件中打印传入的函数" class="headerlink" title="小程序端不要在组件中打印传入的函数"></a>小程序端不要在组件中打印传入的函数</h5><blockquote>
+<p>前面已经提到小程序端的组件传入函数的原理，所以在小程序端不要在组件中打印传入的函数，因为拿不到结果，但是 this.props.onXxx &amp;&amp; this.props.onXxx() 这种判断函数是否传入来进行调用的写法是完全支持的。</p>
+</blockquote>
+<h5 id="小程序端不要将在模板中用到的数据设置为-undefined"><a href="#小程序端不要将在模板中用到的数据设置为-undefined" class="headerlink" title="小程序端不要将在模板中用到的数据设置为 undefined"></a>小程序端不要将在模板中用到的数据设置为 undefined</h5><blockquote>
+<p>由于小程序不支持将 data 中任何一项的 value 设为 undefined ，在 setState 的时候也请避免这么用。你可以使用 null 来替代。</p>
+</blockquote>
+<h5 id="小程序端不要在组件中打印-this-props-children"><a href="#小程序端不要在组件中打印-this-props-children" class="headerlink" title="小程序端不要在组件中打印 this.props.children"></a>小程序端不要在组件中打印 this.props.children</h5><blockquote>
+<p>在微信小程序端是通过 <slot /> 来实现往自定义组件中传入元素的，而 Taro 利用 this.props.children 在编译时实现了这一功能， this.props.children 会直接被编译成 <slot /> 标签，所以它在小程序端属于语法糖的存在，请不要在组件中打印它。</p>
+</blockquote>
+<blockquote>
+<p>支持 props 传入 JSX<br>支持 props 传入 JSX，但是元素传入 JSX 的属性名必须以 render 开头</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//子组件</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dialog</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View className=<span class="string">'dialog'</span>&gt;</span><br><span class="line">        &lt;View className=<span class="string">'header'</span>&gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.props.renderHeader&#125;</span><br><span class="line">        &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">        &lt;View className='body'&gt;</span></span><br><span class="line"><span class="regexp">          &#123;this.props.children&#125;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>View&gt;</span><br><span class="line">        &lt;View className=<span class="string">'footer'</span>&gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.props.renderFooter&#125;</span><br><span class="line">        &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>View&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//父组件</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View className=<span class="string">'container'</span>&gt;</span><br><span class="line">        &lt;Dialog</span><br><span class="line">          renderHeader=&#123;</span><br><span class="line">            &lt;View className=<span class="string">'welcome-message'</span>&gt;Welcome!<span class="xml"><span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line">          &#125;</span><br><span class="line">          renderFooter=&#123;</span><br><span class="line">            &lt;Button className=<span class="string">'close'</span>&gt;Close&lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">          &#125;</span></span><br><span class="line"><span class="regexp">        &gt;</span></span><br><span class="line"><span class="regexp">          &lt;View className="dialog-message"&gt;</span></span><br><span class="line"><span class="regexp">            Thank you for using Taro.</span></span><br><span class="line"><span class="regexp">          &lt;/</span>View&gt;</span><br><span class="line">        &lt;<span class="regexp">/Dialog&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>View&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>不要以 id、class、style 作为自定义组件的属性与内部 state 的名称，因为这些属性名在微信小程序小程序中会丢失。</p>
+</blockquote>
+<blockquote>
+<p>不要在 state 与 props 上用同名的字段，因为这些字段在微信小程序中都会挂在 data 上。</p>
+</blockquote>
+<p>小程序中页面生命周期 componentWillMount 不一致问题</p>
+<blockquote>
+<p>由于微信小程序里页面在 onLoad 时才能拿到页面的路由参数，而页面 onLoad 前组件都已经 attached 了。因此页面的 componentWillMount 可能会与预期不太一致</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误写法</span></span><br><span class="line">render () &#123;</span><br><span class="line">  <span class="comment">// 在 willMount 之前无法拿到路由参数</span></span><br><span class="line">  <span class="keyword">const</span> abc = <span class="keyword">this</span>.$router.params.abc</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Custom</span> <span class="attr">adc</span>=<span class="string">&#123;abc&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">// 正确写法</span></span><br><span class="line"><span class="xml">componentWillMount () &#123;</span></span><br><span class="line"><span class="xml">  const abc = this.$router.params.abc</span></span><br><span class="line"><span class="xml">  this.setState(&#123;</span></span><br><span class="line"><span class="xml">    abc</span></span><br><span class="line"><span class="xml">  &#125;)</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="xml">render () &#123;</span></span><br><span class="line"><span class="xml">  // 增加一个兼容判断</span></span><br><span class="line">  return this.state.abc &amp;&amp; &lt;Custom adc=&#123;abc&#125; /&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>组件的 constructor 与 render 提前调用</p>
+<blockquote>
+<p>很多细心的开发者应该已经注意到了，在 Taro 编译到小程序端后，组件的 constructor 与 render 默认会多调用一次，表现得与 React 不太一致。</p>
+</blockquote>
+<blockquote>
+<p>这是因为，Taro 的组件编译后就是小程序的自定义组件，而小程序的自定义组件的初始化时是可以指定 data 来让组件拥有初始化数据的。开发者一般会在组件的 constructor 中设置一些初始化的 state，同时也可能会在 render 中处理 state 与 props 产生新的数据，在 Taro 中多出的这一次提前调用，就是为了收集组件的初始化数据，给自定义组件提前生成 data ，以保证组件初始化时能带有数据，让组件初次渲染正常。</p>
+</blockquote>
+<blockquote>
+<p>所以，在编码时，需要在处理数据的时候做一些容错处理，这样可以避免在 constructor 与 render 提前调用时出现由于没有数据导致出错的情况。</p>
+</blockquote>
+<blockquote>
+<p>在 Taro 中，JS 代码里必须书写单引号，特别是 JSX 中，如果出现双引号，可能会导致编译错误。</p>
+</blockquote>
+<blockquote>
+<p>不要以解构的方式来获取通过 env 配置的 process.env 环境变量，请直接以完整书写的方式 process.env.NODE_ENV 来进行使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 错误写法，不支持</span><br><span class="line">const &#123; NODE_ENV = &apos;development&apos; &#125; = process.env</span><br><span class="line">if (NODE_ENV === &apos;development&apos;) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 正确写法</span><br><span class="line">if (process.env.NODE_ENV === &apos;development&apos;) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>this.$componentType 可能取值分别为 PAGE 和 COMPONENT，开发者可以根据此变量的取值分别采取不同逻辑。</p>
+</blockquote>
+<blockquote>
+<p>原生小程序组件传递 props 给 Taro 组件</p>
+</blockquote>
+<p>Taro v1.3+ 对 props 系统进行了改造，使得不能兼容原生组件通过 properties 传入的属性。</p>
+<p>目前可以通过把所有需要传入 Taro 组件的 props，通过借助 extraProps 属性来解决。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 小程序组件常规 props 传递</span><br><span class="line">&lt;plugin title=&quot;&#123;&#123;name&#125;&#125;&quot; desc=&quot;&#123;&#123;desc&#125;&#125;&quot; bindonclick=&quot;onClick&quot;&gt;&lt;/plugin&gt;</span><br><span class="line"></span><br><span class="line">// 原生小程序组件调用 Taro 组件时需要改造成以下形式：</span><br><span class="line">this.setData(&#123;</span><br><span class="line">  extraProps: &#123;</span><br><span class="line">    name,</span><br><span class="line">    desc,</span><br><span class="line">    onClick: this.onClick</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;plugin extraProps=&quot;&#123;&#123;extraProps&#125;&#125;&quot; &gt;&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h2><blockquote>
+<p>新增一个自行命名的 JS 文件，例如 global_data.js，示例代码如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const globalData = &#123;&#125;</span><br><span class="line"></span><br><span class="line">export function set (key, val) &#123;</span><br><span class="line">  globalData[key] = val</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export function get (key) &#123;</span><br><span class="line">  return globalData[key]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>随后就可以在任意位置进行使用啦</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import &#123; set as setGlobalData, get as getGlobalData &#125; from &apos;./path/name/global_data&apos;</span><br><span class="line"></span><br><span class="line">setGlobalData(&apos;test&apos;, 1)</span><br><span class="line"></span><br><span class="line">getGlobalData(&apos;test&apos;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>taro的路由是自带的，不需要我们额外配置，只需要我们在app.js下config中配置pages即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class App extends Component &#123;</span><br><span class="line">    config = &#123;</span><br><span class="line">        pages: [</span><br><span class="line">            &apos;pages/test/test&apos;,</span><br><span class="line">            &apos;pages/index/index&apos;</span><br><span class="line">        ],</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 调用   此处注意需要添加 ‘/’</span><br><span class="line">Taro.navigateTo(&#123;</span><br><span class="line">  url:&apos;/pages/test/test&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="组件的外部样式和全局样式"><a href="#组件的外部样式和全局样式" class="headerlink" title="组件的外部样式和全局样式"></a>组件的外部样式和全局样式</h3><p>自定义组件对应的样式文件，只对该组件内的节点生效。编写组件样式时，需要注意以下几点：</p>
+<ul>
+<li>组件和引用组件的页面不能使用 id 选择器（#a）、属性选择器（[a]）和标签名选择器，请改用 class 选择器。</li>
+<li>组件和引用组件的页面中使用后代选择器（.a .b）在一些极端情况下会有非预期的表现，如遇，请避免使用。</li>
+<li>子元素选择器（.a &gt; .b）只能用于 View 组件与其子节点之间，用于其他组件可能导致非预期的情况。</li>
+<li>继承样式，如 font 、 color ，会从组件外（父组件）继承到组件内。但是引用组件时在组件节点上书写的 className 无效。 （具体解决方案请参见下面的外部和全局样式介绍。）</li>
+<li>除继承样式外， app.scss 中的样式、组件所在页面的样式，均对自定义组件无效。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#a &#123; &#125; /* 在组件中不能使用 */</span><br><span class="line">[a] &#123; &#125; <span class="comment">/* 在组件中不能使用 */</span></span><br><span class="line">button &#123; &#125; <span class="comment">/* 在组件中不能使用 */</span></span><br><span class="line">.a &gt; .b &#123; &#125; <span class="comment">/* 除非 .a 是 view 组件节点，否则不一定会生效 */</span></span><br></pre></td></tr></table></figure>
+除此以外，组件可以指定它所在节点的默认样式，使用 :host 选择器（需要包含基础库 1.7.2 或更高版本的开发者工具支持）。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/* 该自定义组件的默认样式 */</span><br><span class="line">:host &#123;</span><br><span class="line">  color: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="外部样式类"><a href="#外部样式类" class="headerlink" title="外部样式类"></a>外部样式类</h3><p>如果想传递样式给引用的自定义组件，以下写法（直接传递 className）不可行：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* CustomComp.js */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomComp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> defaultProps = &#123;</span><br><span class="line">    className: <span class="string">''</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">View</span> <span class="attr">className</span>=<span class="string">&#123;this.props.className&#125;</span>&gt;</span>这段文本的颜色不会由组件外的 class 决定<span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* MyPage.js */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">MyPage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">CustomComp</span> <span class="attr">className</span>=<span class="string">"red-text"</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">/* MyPage.scss */</span></span><br><span class="line"><span class="xml">.red-text &#123;</span></span><br><span class="line"><span class="xml">  color: red;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>取而代之的，需要利用 externalClasses 定义段定义若干个外部样式类。这个特性从小程序基础库版本 1.9.90 开始支持。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* CustomComp.js */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomComp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> externalClasses = [<span class="string">'my-class'</span>]</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">View</span> <span class="attr">className</span>=<span class="string">"my-class"</span>&gt;</span>这段文本的颜色由组件外的 class 决定<span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* MyPage.js */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">MyPage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">CustomComp</span> <span class="attr">my-class</span>=<span class="string">"red-text"</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">/* MyPage.scss */</span></span><br><span class="line"><span class="xml">.red-text &#123;</span></span><br><span class="line"><span class="xml">  color: red;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：externalClasses 需要使用 短横线命名法 (kebab-case)，而不是 React 惯用的 驼峰命名法 (camelCase)。否则无效。</p>
+</blockquote>
+<h3 id="全局样式类"><a href="#全局样式类" class="headerlink" title="全局样式类"></a>全局样式类</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* CustomComp.js */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomComp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> options = &#123;</span><br><span class="line">    addGlobalClass: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">View</span> <span class="attr">className</span>=<span class="string">"red-text"</span>&gt;</span>这段文本的颜色由组件外的 class 决定<span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 组件外的样式定义 */</span></span><br><span class="line">.red-text &#123;</span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Jsx"><a href="#Jsx" class="headerlink" title="Jsx"></a>Jsx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import Taro, &#123; Component &#125; from &apos;@tarojs/taro&apos;</span><br><span class="line">import &#123; View &#125; from &apos;@tarojs/components&apos;</span><br><span class="line"></span><br><span class="line">class Home extends Component &#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;View&gt;Hello World!&lt;/View&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>必须声明 Taro 和组件<br>首字母大写与驼峰式命名<br>React 可以使用 … 拓展操作符来传递属性，但在 Taro 中你不能这么做。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> props = &#123;<span class="attr">firstName</span>: <span class="string">'Plus'</span>, <span class="attr">lastName</span>: <span class="string">'Second'</span>&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Greeting</span> &#123;<span class="attr">...props</span>&#125; /&gt;</span></span></span><br><span class="line"><span class="xml">//这样的操作会报错。你只能手动地把所有需要引用的 props 写上去：</span></span><br><span class="line"> &lt;Greeting firstName="Plus" lastName="Second" /&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="布尔值、Null-和-Undefined-被忽略"><a href="#布尔值、Null-和-Undefined-被忽略" class="headerlink" title="布尔值、Null 和 Undefined 被忽略"></a>布尔值、Null 和 Undefined 被忽略</h3><blockquote>
+<p>false、null、undefined 和 true 都是有效的 children，但它们不会直接被渲染。下面的表达式是等价的：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;View /&gt;</span><br><span class="line"></span><br><span class="line">&lt;View&gt;<span class="xml"><span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;View&gt;&#123;<span class="literal">false</span>&#125;&lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;View&gt;&#123;null&#125;&lt;/</span>View&gt;</span><br><span class="line"></span><br><span class="line">&lt;View&gt;&#123;<span class="literal">undefined</span>&#125;&lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;View&gt;&#123;true&#125;&lt;/</span>View&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Taro-和-React-一样，也有一个严格的规则："><a href="#Taro-和-React-一样，也有一个严格的规则：" class="headerlink" title="Taro 和 React 一样，也有一个严格的规则："></a>Taro 和 React 一样，也有一个严格的规则：</h3><blockquote>
+<p>所有的 Taro 组件必须像纯函数那样使用它们的 props。</p>
+</blockquote>
+<h4 id="使用-PropTypes-检查类型"><a href="#使用-PropTypes-检查类型" class="headerlink" title="使用 PropTypes 检查类型"></a>使用 PropTypes 检查类型</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeting</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;h1&gt;Hello, &#123;<span class="keyword">this</span>.props.name&#125;&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">Greeting.propTypes = &#123;</span></span><br><span class="line"><span class="regexp">  name: PropTypes.string</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 如上例，Taro 与 React 一样，也支持 PropTypes 检查类型，目前在小程序端还有些问题，但在 H5 端可以使用，用法和在 React 里一样。 更多可参照 React 的相关文档。</span></span><br></pre></td></tr></table></figure>
+<h3 id="生命周期-amp-State"><a href="#生命周期-amp-State" class="headerlink" title="生命周期 &amp; State"></a>生命周期 &amp; State</h3><h4 id="状态更新一定是异步的"><a href="#状态更新一定是异步的" class="headerlink" title="状态更新一定是异步的"></a>状态更新一定是异步的</h4><p>Taro 可以将多个 setState() 调用合并成一个调用来提高性能。</p>
+<p>因为 this.state 和 props 一定是异步更新的，所以你不能在 setState 马上拿到 state 的值，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假设我们之前设置了 this.state.counter = 0</span></span><br><span class="line">updateCounter () &#123;</span><br><span class="line">  <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">    counter: <span class="number">1</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.state.counter) <span class="comment">// 这里 counter 还是 0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正确的做法是这样，在 setState 的第二个参数传入一个 callback：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 假设我们之前设置了 this.state.counter = 0</span><br><span class="line">updateCounter () &#123;</span><br><span class="line">  this.setState(&#123;</span><br><span class="line">    counter: 1</span><br><span class="line">  &#125;, () =&gt; &#123;</span><br><span class="line">    // 在这个函数内你可以拿到 setState 之后的值</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h3><p>Taro 事件绑定属性的命名采用驼峰式写法，而不是小写。 如果采用 JSX 的语法你需要传入一个函数作为事件处理函数，而不是一个字符串 (DOM 元素的写法)。 例如，传统的微信小程序模板：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;button onclick=<span class="string">"activateLasers"</span>&gt;</span><br><span class="line">  Activate Lasers</span><br><span class="line">&lt;<span class="regexp">/button&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Taro 中稍稍有点不同：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;button onClick=&#123;<span class="keyword">this</span>.activateLasers&#125;&gt;</span><br><span class="line">  Activate Lasers</span><br><span class="line">&lt;<span class="regexp">/button&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在 Taro 中另一个不同是你不能使用 catchEvent 的方式阻止事件冒泡。你必须明确的使用 stopPropagation</p>
+<h4 id="向事件处理程序传递参数"><a href="#向事件处理程序传递参数" class="headerlink" title="向事件处理程序传递参数"></a>向事件处理程序传递参数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;button onClick=&#123;<span class="keyword">this</span>.deleteRow.bind(<span class="keyword">this</span>, id)&#125;&gt;Delete Row&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 当你通过 bind 方式向监听函数传参，在类组件中定义的监听函数，事件对象 e 要排在所传递参数的后面。</span></span><br><span class="line"><span class="regexp">class Popper extends Component &#123;</span></span><br><span class="line"><span class="regexp">  constructor () &#123;</span></span><br><span class="line"><span class="regexp">    super(...arguments)</span></span><br><span class="line"><span class="regexp">    this.state = &#123; name:'Hello world!' &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ 你可以通过 bind 传入多个参数</span></span><br><span class="line"><span class="regexp">  preventPop (name, test, e) &#123;    /</span><span class="regexp">/事件对象 e 要放在最后</span></span><br><span class="line"><span class="regexp">    e.stopPropagation()</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  render () &#123;</span></span><br><span class="line"><span class="regexp">    return &lt;Button </span></span><br><span class="line"><span class="regexp">    onClick=&#123;this.preventPop.bind(this, this.state.name, 'test')&#125;&gt;&lt;/</span>Button&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用匿名函数"><a href="#使用匿名函数" class="headerlink" title="使用匿名函数"></a>使用匿名函数</h4><blockquote>
+<p>注意：在各小程序端，使用匿名函数，尤其是在 循环中 使用匿名函数，比使用 bind 进行事件传参占用更大的内存，速度也会更慢。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Popper</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> () &#123;</span><br><span class="line">    <span class="keyword">super</span>(...arguments)</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; <span class="attr">name</span>: <span class="string">'Hello world!'</span> &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">const</span> name = <span class="string">'test'</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Button onClick=&#123;(e) =&gt; &#123;</span><br><span class="line">        e.stopPropagation()</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">          name</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;&#125;&gt;</span><br><span class="line">        &#123;<span class="keyword">this</span>.state.name&#125;</span><br><span class="line">      &lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="柯里化传参"><a href="#柯里化传参" class="headerlink" title="柯里化传参"></a>柯里化传参</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Title</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  handleClick = <span class="function">(<span class="params">index</span>) =&gt;</span> <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    e.stopPropagation()</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      currentIndex: index</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; currentIndex &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &#123;<span class="comment">/* 调用 `this.handleClick(currentIndex)` 会返回一个函数，这个函数可以访问到 `currentIndex` 同时也能满足 `onClick` 的签名 */</span>&#125;</span><br><span class="line">      &lt;View onClick=&#123;<span class="keyword">this</span>.handleClick(currentIndex)&#125;&gt;</span><br><span class="line">      &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp"> &#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="函数式组件"><a href="#函数式组件" class="headerlink" title="函数式组件"></a>函数式组件</h4><p>在函数式组件中，事件传参可以传入事件的引用也可以传入匿名函数，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> [c1, setC1] = useState(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">const</span> [c2, setC2] = useState(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">const</span> [c3, setC3] = useState(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> increment = <span class="function"><span class="params">c</span> =&gt;</span> c + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 只有 useCallback 对应的 c1 或 c2 的值改变时，才会返回新的函数</span></span><br><span class="line">  <span class="keyword">const</span> increment1 = useCallback(<span class="function"><span class="params">()</span> =&gt;</span> setC1(increment), [c1]);</span><br><span class="line">  <span class="keyword">const</span> increment2 = useCallback(<span class="function"><span class="params">()</span> =&gt;</span> setC2(increment), [c2]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">View</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">Text</span>&gt;</span> Counter 1 is &#123;c1&#125; <span class="tag">&lt;/<span class="name">Text</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">Text</span>&gt;</span> Counter 2 is &#123;c2&#125; <span class="tag">&lt;/<span class="name">Text</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">Text</span>&gt;</span> Counter 3 is &#123;c3&#125; <span class="tag">&lt;/<span class="name">Text</span>&gt;</span></span></span><br><span class="line">    &lt;View&gt;</span><br><span class="line">      &lt;Button onClick=&#123;increment1&#125;&gt;Increment Counter 1&lt;/Button&gt;</span><br><span class="line">      &lt;Button onClick=&#123;increment2&#125;&gt;Increment Counter 2&lt;/Button&gt;</span><br><span class="line">      &lt;Button onClick=&#123;() =&gt; setC3(increment)&#125;&gt;Increment Counter 3&lt;/Button&gt;</span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">View</span>&gt;</span></span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="任何组件的事件传递都要以-on-开头"><a href="#任何组件的事件传递都要以-on-开头" class="headerlink" title="任何组件的事件传递都要以 on 开头"></a>任何组件的事件传递都要以 on 开头</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在微信小程序中，可能你会看到像 bindTap 这样的用法，但在 Taro 中，事件参数(props)都以 on 开头:</span></span><br><span class="line"><span class="comment">// 错误 </span></span><br><span class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">View</span> <span class="attr">bindtap</span>=<span class="string">&#123;this.onTag&#125;</span> /&gt;</span></span></span><br><span class="line">const element2 = &lt;Input bindfocus=&#123;this.onFocus&#125; /&gt;</span><br><span class="line">const element3 = &lt;CustomElement animationEnd=&#123;this.props.onAnimationEnd&#125; /&gt;</span><br><span class="line"></span><br><span class="line">// 只要当 JSX 组件传入的参数是函数，参数名就必须以 on 开头：</span><br><span class="line"></span><br><span class="line">// 正确</span><br><span class="line">const element = &lt;View onClick=&#123;this.onTag&#125; /&gt;</span><br><span class="line">const element2 = &lt;Input onFocus=&#123;this.onFocus&#125; /&gt;</span><br><span class="line">const element3 = &lt;CustomElement onAnimationEnd=&#123;this.props.onAnimationEnd&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h3><p>taroKey 适用于循环渲染原生小程序组件，赋予每个元素唯一确定标识，转换为小程序的 wx:key。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [...Array(<span class="number">100</span>).keys()] <span class="comment">// [0, 1, 2, ..., 98, 99]</span></span><br><span class="line"><span class="keyword">const</span> listItems = numbers.map(<span class="function">(<span class="params">number</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="comment">// native component</span></span><br><span class="line">    &lt;g-list</span><br><span class="line">      taroKey=&#123;<span class="built_in">String</span>(number)&#125;</span><br><span class="line">      className=<span class="string">'g-list'</span></span><br><span class="line">    &gt;</span><br><span class="line">    我是第 &#123;number + <span class="number">1</span>&#125; 个数字</span><br><span class="line">    &lt;<span class="regexp">/g-list&gt;</span></span><br><span class="line"><span class="regexp">  )</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br></pre></td></tr></table></figure>
+<p>元素的 key 在他的兄弟元素之间应该唯一</p>
+<h4 id="与-React-的不同"><a href="#与-React-的不同" class="headerlink" title="与 React 的不同"></a>与 React 的不同</h4><blockquote>
+<p>在 React 中，JSX 是会编译成普通的 JS 的执行，每一个 JSX 元素，其实会通过 createElement 函数创建成一个 JavaScript 对象（React Element），因此实际上你可以这样写代码 React 也是完全能渲染的：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> list = <span class="keyword">this</span>.state.list.map(<span class="function"><span class="params">l</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (l.selected) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;l.text&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;).filter(React.isValidElement)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 甚至</span></span><br><span class="line"><span class="keyword">const</span> list = <span class="keyword">this</span>.state.list.map(<span class="function"><span class="params">l</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (l.selected) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="string">'$$typeof'</span>: <span class="built_in">Symbol</span>(react.element),</span><br><span class="line">      <span class="string">'props'</span>: &#123;</span><br><span class="line">        children: l.text</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">'type'</span>: <span class="string">'li'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;).filter(React.isValidElement)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="函数式组件-1"><a href="#函数式组件-1" class="headerlink" title="函数式组件"></a>函数式组件</h3><p>定义一个函数式组件非常简单：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Welcome</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">View</span>&gt;</span>Hello, &#123;props.name&#125;<span class="tag">&lt;/<span class="name">View</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这个函数接受一个参数 props，并且返回的是一个 JSX 元素。这样的函数就是函数式组件。相对于的 ES6 Class 组件是：</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Welcome</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">View</span>&gt;</span>Hello, &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">View</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="类函数式组件"><a href="#类函数式组件" class="headerlink" title="类函数式组件"></a>类函数式组件</h3><blockquote>
+<p>由于一个文件不能定义两个组件，但有时候我们需要组件内部的抽象组件，这时类函数式组件就是你想要答案。假设我们有一个 Class 组件，它包括了一个 Header 一个 Footer，我们可以这样定义：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomePage</span> <span class="keyword">extends</span> <span class="title">Taro</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  renderHeader () &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; header &#125; = <span class="keyword">this</span>.state</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">View</span>&gt;</span>&#123;header&#125;<span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  renderFooter (footer) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">View</span>&gt;</span>&#123;footer&#125;<span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View&gt;</span><br><span class="line">        &#123;<span class="keyword">this</span>.renderHeader()&#125;</span><br><span class="line">        &#123;...&#125;</span><br><span class="line">        &#123;<span class="keyword">this</span>.renderFooter(<span class="string">'footer'</span>)&#125;</span><br><span class="line">      &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>在 renderHeader 或 renderFooter 函数中，我们可以访问类的 this，也可以传入不限量的参数，这类型的函数也可以调用无限次数。但这样的写法也存在一些限制：</p>
+<ul>
+<li>函数的命名必须以 render 开头，render 后的第一个字母需要大写</li>
+<li>函数的参数不得传入 JSX 元素或 JSX 元素引用</li>
+<li>函数不能递归地调用自身<blockquote>
+<p>形如 renderHeader 这样的函数在小程序中会编译成 template，而小程序的 template 是无法做到递归调用自身的。当你有这样的需求时，可以新建两个一模一样的组件和文件：ComponentA 和 ComponentB，在 ComponentA 中调用 ComponentB，在 ComponentB 中调用 ComponnetA。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="闭包函数式组件"><a href="#闭包函数式组件" class="headerlink" title="闭包函数式组件"></a>闭包函数式组件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Header</span> (<span class="params">&#123; user &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> name = user.name</span><br><span class="line">  <span class="keyword">const</span> renderTitle = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// renderTitle 每次都能获取到当前作用域 `name` 的值</span></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">View</span>&gt;</span>Welcome, &#123;name&#125;<span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;View&gt;</span><br><span class="line">      &#123;<span class="comment">/* 重要人士我们要欢迎他三次 */</span> &#125;</span><br><span class="line">      &#123;renderTitle()&#125;</span><br><span class="line">      &#123;renderTitle()&#125;</span><br><span class="line">      &#123;renderTitle()&#125;</span><br><span class="line">    &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">  )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><blockquote>
+<p>const MyContext = Taro.createContext(defaultValue)<br>创建一个 Context 对象。当 Taro 渲染一个订阅了这个 Context 对象的组件，这个组件会从最先渲染的 Provider 中读取到 Provider 的 value。<br>在 Taro 中，即便在框架层面也无法知道组件的树结构，因此 Taro 无法像 React 一样往父组件找离自己最近的 Provider。因此创建的 Context 最好只在一个地方使用。</p>
+</blockquote>
+<blockquote>
+<p>&lt;MyContext.Provider value={/* 某个值 */}&gt;</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> <span class="keyword">extends</span> <span class="title">Taro</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">this</span>.context;</span><br><span class="line">    <span class="comment">/* 在组件挂载完成后，使用 MyContext 组件的值来执行一些有副作用的操作 */</span></span><br><span class="line">  &#125;</span><br><span class="line">  componentDidUpdate() &#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">this</span>.context;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">  componentWillUnmount() &#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">this</span>.context;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">this</span>.context;</span><br><span class="line">    <span class="comment">/* 基于 MyContext 组件的值进行渲染 */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">MyClass.contextType = MyContext;</span><br></pre></td></tr></table></figure>
+
+<h4 id="context使用"><a href="#context使用" class="headerlink" title="context使用"></a>context使用</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// counter-context.ts</span></span><br><span class="line"><span class="keyword">import</span> Taro <span class="keyword">from</span> <span class="string">'@tarojs/taro'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> CounterContext = Taro.createContext(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> UserContext = Taro.createContext(&#123;</span><br><span class="line">  name: <span class="string">'Guest'</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// index.tsx</span></span><br><span class="line"><span class="keyword">import</span> Taro, &#123; Component, Config, useContext &#125; <span class="keyword">from</span> <span class="string">'@tarojs/taro'</span></span><br><span class="line"><span class="keyword">import</span> &#123; CounterContext,UserContext &#125; <span class="keyword">from</span> <span class="string">'./counter-context'</span></span><br><span class="line"><span class="keyword">import</span> &#123; View&#125; <span class="keyword">from</span> <span class="string">'@tarojs/components'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="comment">// static contextType = CounterContext</span></span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="comment">// const value = this.context</span></span><br><span class="line">    <span class="comment">// const user = this.context</span></span><br><span class="line">    <span class="keyword">const</span> value =  useContext(CounterContext)</span><br><span class="line">    <span class="keyword">const</span> &#123;name&#125; =  useContext(UserContext)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View&gt;</span><br><span class="line">        Count: &#123;value&#125;</span><br><span class="line">        name:&#123;name&#125;</span><br><span class="line">      &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ counter.ts</span></span><br><span class="line"><span class="regexp">import Taro, &#123; Component, Config, useState &#125; from '@tarojs/</span>taro<span class="string">'</span></span><br><span class="line"><span class="string">import &#123; CounterContext,UserContext &#125;  from '</span>./counter-context<span class="string">'</span></span><br><span class="line"><span class="string">import Child  from '</span>./child<span class="string">'</span></span><br><span class="line"><span class="string">import &#123; View, Button&#125; from '</span>@tarojs/components<span class="string">'</span></span><br><span class="line"><span class="string">export default class ContextValue extends Component &#123;</span></span><br><span class="line"><span class="string">  gogogo()&#123;</span></span><br><span class="line"><span class="string">    console.log('</span>gogo<span class="string">');</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">  render () &#123;</span></span><br><span class="line"><span class="string">    const [ count , setCount] = useState(0)</span></span><br><span class="line"><span class="string">    const [ val ] = useState(&#123;name:'</span>asd<span class="string">'&#125;)</span></span><br><span class="line"><span class="string">    return (</span></span><br><span class="line"><span class="string">      &lt;CounterContext.Provider value=&#123;count&#125;&gt;</span></span><br><span class="line"><span class="string">        &lt;UserContext.Provider value=&#123;val&#125;&gt;</span></span><br><span class="line"><span class="string">        &lt;View className='</span>container<span class="string">'&gt;</span></span><br><span class="line"><span class="string">          &lt;Child /&gt;</span></span><br><span class="line"><span class="string">          &lt;Button onClick=&#123;() =&gt; setCount(0)&#125;&gt;Reset&lt;/Button&gt;</span></span><br><span class="line"><span class="string">          &lt;Button onClick=&#123;() =&gt; setCount(prevCount =&gt; prevCount + 1)&#125;&gt;+&lt;/Button&gt;</span></span><br><span class="line"><span class="string">          &lt;Button onClick=&#123;() =&gt; setCount(prevCount =&gt; prevCount - 1)&#125;&gt;-&lt;/Button&gt;</span></span><br><span class="line"><span class="string">        &lt;/View&gt;</span></span><br><span class="line"><span class="string">        &lt;/UserContext.Provider&gt;</span></span><br><span class="line"><span class="string">      &lt;/CounterContext.Provider&gt;</span></span><br><span class="line"><span class="string">    )</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Children"><a href="#Children" class="headerlink" title="Children"></a>Children</h3><p>在我们设计组件时，有些组件通常不知道自己的子组件会有什么内容，例如 Sidebar 和 Dialog 这样的容器组件。</p>
+<p>我们建议在这样的情况使用 this.props.children 来传递子元素</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dialog</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View className=<span class="string">'dialog'</span>&gt;</span><br><span class="line">        &lt;View className=<span class="string">'header'</span>&gt;Welcome!<span class="xml"><span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line">        &lt;View className=<span class="string">'body'</span>&gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.props.children&#125;</span><br><span class="line">        &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">        &lt;View className='footer'&gt;-- divider --&lt;/</span>View&gt;</span><br><span class="line">      &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这样就能允许其它组件在 JSX 中嵌套任意子组件传递给 Dialog:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class App extends Component &#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;View className=&apos;container&apos;&gt;</span><br><span class="line">        &lt;Dialog&gt;</span><br><span class="line">          &lt;View className=&quot;dialog-message&quot;&gt;</span><br><span class="line">            Thank you for using Taro.</span><br><span class="line">          &lt;/View&gt;</span><br><span class="line">        &lt;/Dialog&gt;</span><br><span class="line">      &lt;/View&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 <Dialog /> JSX 标签内的任何内容都会作为它的子元素(Children)都会传递到它的组件。</p>
+<p>注意事项:不要对 this.props.children 进行任何操作</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Taro 在小程序中实现这个功能使用的是小程序的 slot 功能,也就是说你可以把 this.props.children 理解为 slot 的语法糖，this.props.children 在 Taro 中并不是 React 的 ReactElement 对象，因此形如 this.props.children &amp;&amp; this.props.children、this.props.children[0] 在 Taro 中都是非法的。</span></span><br><span class="line"><span class="comment">// this.props.children 无法用 defaultProps 设置默认内容。由于小程序的限制，Taro 也无法知道组件的消费者是否传入内容，所以无法应用默认内容。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不能把 this.props.children 分解为变量再使用。由于普通的 props 有一个确切的值，所以当你把它们分解为变量运行时可以处理，this.props.children 则不能这样操作，你必须显性地把 this.props.children 全部都写完整才能实现它的功能。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dialog</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View className=<span class="string">'dialog'</span>&gt;</span><br><span class="line">        &lt;View className=<span class="string">'header'</span>&gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.props.renderHeader&#125;</span><br><span class="line">        &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">        &lt;View className='body'&gt;</span></span><br><span class="line"><span class="regexp">          &#123;this.props.children&#125;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>View&gt;</span><br><span class="line">        &lt;View className=<span class="string">'footer'</span>&gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.props.renderFooter&#125;</span><br><span class="line">        &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>View&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View className=<span class="string">'container'</span>&gt;</span><br><span class="line">        &lt;Dialog</span><br><span class="line">          renderHeader=&#123;</span><br><span class="line">            &lt;View className=<span class="string">'welcome-message'</span>&gt;Welcome!<span class="xml"><span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line">          &#125;</span><br><span class="line">          renderFooter=&#123;</span><br><span class="line">            &lt;Button className=<span class="string">'close'</span>&gt;Close&lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">          &#125;</span></span><br><span class="line"><span class="regexp">        &gt;</span></span><br><span class="line"><span class="regexp">          &lt;View className="dialog-message"&gt;</span></span><br><span class="line"><span class="regexp">            Thank you for using Taro.</span></span><br><span class="line"><span class="regexp">          &lt;/</span>View&gt;</span><br><span class="line">        &lt;<span class="regexp">/Dialog&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>View&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所有组合都必须用 render 开头，且遵守驼峰式命名法。和我们的事件规范以 on 开头一样，组件组合使用 render 开头。<br>组合只能传入单个 JSX 元素，不能传入其它任何类型。当你需要进行一些条件判断或复杂逻辑操作的时候，可以使用一个 Block 元素包裹住，然后在 Block 元素的里面填充其它复杂的逻辑。</p>
+<h4 id="Render-Props"><a href="#Render-Props" class="headerlink" title="Render Props"></a>Render Props</h4><p>具有 render prop 的组件接受一个函数，该函数返回一个 Taro 元素并调用它而不是实现自己的渲染逻辑。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// cat.js</span></span><br><span class="line"><span class="keyword">import</span> catImage <span class="keyword">from</span> <span class="string">'./cat.jpg'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Taro</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> defaultProps = &#123;</span><br><span class="line">    mouse: &#123;</span><br><span class="line">      x: <span class="number">0</span>,</span><br><span class="line">      y: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; mouse &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Image src=&#123;catImage&#125; style=&#123;&#123; <span class="attr">position</span>: <span class="string">'absolute'</span>, <span class="attr">left</span>: mouse.x, <span class="attr">top</span>: mouse.y &#125;&#125; /&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// mouse.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mouse</span> <span class="keyword">extends</span> <span class="title">Taro</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.handleMouseMove = <span class="keyword">this</span>.handleClick.bind(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleClick(event) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; x, y &#125;  = event.detail</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      x,</span><br><span class="line">      y</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View style=&#123;&#123; <span class="attr">height</span>: <span class="string">'100%'</span> &#125;&#125; onClick=&#123;<span class="keyword">this</span>.handleClick&#125;&gt;</span><br><span class="line"></span><br><span class="line">        &#123;<span class="comment">/*</span></span><br><span class="line"><span class="comment">          我们可以把 prop 当成一个函数，动态地调整渲染内容。</span></span><br><span class="line"><span class="comment">        */</span>&#125;</span><br><span class="line">        &#123;<span class="keyword">this</span>.props.renderCat(<span class="keyword">this</span>.state)&#125;</span><br><span class="line">      &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ MouseTracker.js</span></span><br><span class="line"><span class="regexp">class MouseTracker extends Taro.Component &#123;</span></span><br><span class="line"><span class="regexp">  render() &#123;</span></span><br><span class="line"><span class="regexp">    return (</span></span><br><span class="line"><span class="regexp">      &lt;View&gt;</span></span><br><span class="line"><span class="regexp">        &lt;View&gt;点击鼠标!&lt;/</span>View&gt;</span><br><span class="line">        &#123;<span class="comment">/*</span></span><br><span class="line"><span class="comment">          Mouse 如何渲染由 MouseTracker 的状态控制</span></span><br><span class="line"><span class="comment">        */</span>&#125;</span><br><span class="line">        &lt;Mouse renderCat=&#123;mouse =&gt; (</span><br><span class="line">          &lt;Cat mouse=&#123;mouse&#125; /&gt;</span><br><span class="line">        )&#125;/&gt;</span><br><span class="line">      &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h3><h4 id="使用字符串创建-ref"><a href="#使用字符串创建-ref" class="headerlink" title="使用字符串创建 ref"></a>使用字符串创建 ref</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  componentDidMount () &#123;</span><br><span class="line">    <span class="comment">// 如果 ref 的是小程序原生组件，那只有在 didMount 生命周期之后才能通过</span></span><br><span class="line">    <span class="comment">// this.refs.input 访问到小程序原生组件</span></span><br><span class="line">    <span class="keyword">if</span> (process.env.TARO_ENV === <span class="string">'weapp'</span>) &#123;</span><br><span class="line">      <span class="comment">// 这里 this.refs.input 访问的时候通过 `wx.createSeletorQuery` 取到的小程序原生组件</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (process.env.TARO_ENV === <span class="string">'h5'</span>) &#123;</span><br><span class="line">      <span class="comment">// 这里 this.refs.input 访问到的是 `@tarojs/components` 的 `Input` 组件实例</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Input</span> <span class="attr">ref</span>=<span class="string">'input'</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="通过函数创建-ref"><a href="#通过函数创建-ref" class="headerlink" title="通过函数创建 ref"></a>通过函数创建 ref</h4><p>你也可以通过传递一个函数创建 ref, 在函数中被引用的组件会作为函数的第一个参数传递。如果是被引用的组件是自定义组件，那可以在任意的生命周期访问引用。</p>
+<blockquote>
+<p>不管在任何情况下，Taro 都推荐你使用函数的方式创建 ref。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  roar () &#123;</span><br><span class="line">    <span class="comment">// 会打印 `miao, miao, miao~`</span></span><br><span class="line">    <span class="keyword">this</span>.cat.miao()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  refCat = <span class="function">(<span class="params">node</span>) =&gt;</span> <span class="keyword">this</span>.cat = node <span class="comment">// `this.cat` 会变成 `Cat` 组件实例的引用</span></span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Cat</span> <span class="attr">ref</span>=<span class="string">&#123;this.refCat&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">class Cat extends Component &#123;</span></span><br><span class="line"><span class="xml">  miao () &#123;</span></span><br><span class="line"><span class="xml">    console.log('miao, miao, miao~')</span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  render () &#123;</span></span><br><span class="line"><span class="xml">    return <span class="tag">&lt;<span class="name">View</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="通过-createRef-创建-ref"><a href="#通过-createRef-创建-ref" class="headerlink" title="通过 createRef 创建 ref"></a>通过 createRef 创建 ref</h3><blockquote>
+<p>Refs 还是使用 Taro.createRef() 创建的，并通过 ref 属性附加到 Taro 元素。在构造组件时，通常将 Refs 分配给实例属性，以便可以在整个组件中引用它们。</p>
+</blockquote>
+<blockquote>
+<p>当 ref 被传递给 render 中的元素时，对该节点的引用可以在 ref 的 current 属性中被访问。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.cat = Taro.createRef()</span><br><span class="line"></span><br><span class="line">  roar () &#123;</span><br><span class="line">    <span class="comment">// 会打印 `miao, miao, miao~`</span></span><br><span class="line">    <span class="keyword">this</span>.cat.current.miao()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Cat</span> <span class="attr">ref</span>=<span class="string">&#123;this.cat&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">class Cat extends Component &#123;</span></span><br><span class="line"><span class="xml">  miao () &#123;</span></span><br><span class="line"><span class="xml">    console.log('miao, miao, miao~')</span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  render () &#123;</span></span><br><span class="line"><span class="xml">    return <span class="tag">&lt;<span class="name">View</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="跨平台开发"><a href="#跨平台开发" class="headerlink" title="跨平台开发"></a>跨平台开发</h3><p>内置环境变量<br>Taro 在编译时提供了一些内置的环境变量来帮助用户做一些特殊处理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">process.env.TARO_ENV </span><br><span class="line"><span class="comment">//用于判断当前编译类型，目前有 weapp / swan / alipay / h5 / rn / tt / qq / quickapp 八个取值，可以通过这个变量来书写对应一些不同环境下的代码，在编译时会将不属于当前编译类型的代码去掉，只保留当前编译类型下的代码，例如想在微信小程序和 H5 端分别引用不同资源</span></span><br><span class="line"><span class="keyword">if</span> (process.env.TARO_ENV === <span class="string">'weapp'</span>) &#123;</span><br><span class="line">  <span class="built_in">require</span>(<span class="string">'path/to/weapp/name'</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (process.env.TARO_ENV === <span class="string">'h5'</span>) &#123;</span><br><span class="line">  <span class="built_in">require</span>(<span class="string">'path/to/h5/name'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 同时也可以在 JSX 中使用，决定不同端要加载的组件</span></span><br><span class="line">render () &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;View&gt;</span><br><span class="line">      &#123;process.env.TARO_ENV === <span class="string">'weapp'</span> &amp;&amp; <span class="xml"><span class="tag">&lt;<span class="name">ScrollViewWeapp</span> /&gt;</span>&#125;</span></span><br><span class="line"><span class="xml">      &#123;process.env.TARO_ENV === 'h5' &amp;&amp; <span class="tag">&lt;<span class="name">ScrollViewH5</span> /&gt;</span>&#125;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">View</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="统一接口的多端文件"><a href="#统一接口的多端文件" class="headerlink" title="统一接口的多端文件"></a>统一接口的多端文件</h3><p>内置环境变量虽然可以解决大部分跨端的问题，但是会让代码中充斥着逻辑判断的代码，影响代码的可维护性，而且也让代码变得愈发丑陋，为了解决这种问题，自 1.2.17 开始，Taro 提供了另外一种跨端开发的方式作为补充。</p>
+<p>开发者可以通过使用统一接口的多端文件，来解决跨端差异的功能。针对一项功能，如果多个端之间都有差异，那么开发者可以通过将文件修改成 原文件名 + 端类型 的命名形式，不同端的文件代码对外保持统一接口，而引用的时候仍然是 import 原文件名的文件，Taro 在编译时，会跟根据需要编译平台类型，将加载的文件变更为带有对应端类型文件名的文件，从而达到不同的端加载对应文件的目的。</p>
+<p>端类型对应着 process.env.TARO_ENV 的值</p>
+<p>通常有以下两种使用场景。</p>
+<h4 id="多端组件"><a href="#多端组件" class="headerlink" title="多端组件"></a>多端组件</h4><p>假如有一个 Test 组件存在微信小程序、百度小程序和 H5 三个不同版本，那么就可以像如下组织代码</p>
+<p>test.js 文件，这是 Test 组件默认的形式，编译到微信小程序、百度小程序和 H5 三端之外的端使用的版本</p>
+<p>test.h5.js 文件，这是 Test 组件的 H5 版本</p>
+<p>test.weapp.js 文件，这是 Test 组件的 微信小程序 版本</p>
+<p>test.swan.js 文件，这是 Test 组件的 百度小程序 版本</p>
+<p>test.qq.js 文件，这是 Test 组件的 QQ 小程序 版本</p>
+<p>test.quickapp.js 文件，这是 Test 组件的 快应用 版本</p>
+<p>四个文件，对外暴露的是统一的接口，它们接受一致的参数，只是内部有针对各自平台的代码实现</p>
+<p>而我们使用 Test 组件的时候，引用的方式依然和之前保持一致，import 的是不带端类型的文件名，在编译的时候会自动识别并添加端类型后缀</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Test <span class="keyword">from</span> <span class="string">'../../components/test'</span></span><br><span class="line"></span><br><span class="line">&lt;Test argA=&#123;<span class="number">1</span>&#125; argA=&#123;<span class="number">2</span>&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="多端脚本逻辑"><a href="#多端脚本逻辑" class="headerlink" title="多端脚本逻辑"></a>多端脚本逻辑</h4><p>与多端组件类似，假如有需要针对不同的端写不同的脚本逻辑代码，我们也可以类似的进行处理，遵守的唯一原则就是多端文件对外的接口保持一致。</p>
+<p>例如微信小程序上使用 Taro.setNavigationBarTitle 来设置页面标题，H5 使用 document.title，那么可以封装一个 setTitle 方法来抹平两个平台的差异。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 增加 set_title.h5.js，代码如下</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">setTitle</span> (<span class="params">title</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.title = title</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 增加 set_title.weapp.js，代码如下</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Taro <span class="keyword">from</span> <span class="string">'@tarojs/taro'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">setTitle</span> (<span class="params">title</span>) </span>&#123;</span><br><span class="line">  Taro.setNavigationBarTitle(&#123;</span><br><span class="line">    title</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line"><span class="keyword">import</span> setTitle <span class="keyword">from</span> <span class="string">'../utils/set_title'</span></span><br><span class="line"></span><br><span class="line">setTitle(<span class="string">'页面标题'</span>)</span><br></pre></td></tr></table></figure>
+<p>使用要点</p>
+<ul>
+<li>不同端的对应文件一定要统一接口，统一调用方式</li>
+<li>最好有一个平台无关的默认文件，这样在使用 ts 的时候也不会出现报错</li>
+<li>引用文件的时候，只需要写默认文件名，不用带文件后缀</li>
+</ul>
+<h3 id="app-js-中使用不同的-pages"><a href="#app-js-中使用不同的-pages" class="headerlink" title="app.js 中使用不同的 pages"></a>app.js 中使用不同的 pages</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">config: Config = </span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"pages"</span>: preval<span class="string">`</span></span><br><span class="line"><span class="string">    module.exports=(function() &#123;</span></span><br><span class="line"><span class="string">      if (process.env.TARO_ENV === 'weapp') &#123;</span></span><br><span class="line"><span class="string">        return [</span></span><br><span class="line"><span class="string">          '/pages/index/index'</span></span><br><span class="line"><span class="string">        ]</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      if (process.env.TARO_ENV === 'swan') &#123;</span></span><br><span class="line"><span class="string">        return [</span></span><br><span class="line"><span class="string">          '/pages/indexswan/indexswan'</span></span><br><span class="line"><span class="string">        ]</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;)()</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="多端同步调试"><a href="#多端同步调试" class="headerlink" title="多端同步调试"></a>多端同步调试</h3><p>从 1.3.5 版本开始，可以在 dist 目录下创建一个与编译的目标平台名同名的目录，并将结果放在这个目录下，例如编译到微信小程序，最终结果是在 dist/weapp 目录下，这样做的好处是，各个平台使用独立的目录互不影响，从而达到多端同步调试的目的，在 config/index.js 配置如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">outputRoot: <span class="string">`dist/<span class="subst">$&#123;process.env.TARO_ENV&#125;</span>`</span></span><br></pre></td></tr></table></figure>
+<p>多端同步调试需要在终端工具中打开多个 Tab 来同时执行 taro 命令进行同步调试，如下图，编译成微信小程序和支付宝小程序：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Item1:终端窗口1</span></span><br><span class="line">taro build --type alipay --watch</span><br><span class="line"></span><br><span class="line"><span class="comment">// Iterm2：终端窗口2</span></span><br><span class="line">taro build --type weapp --watch</span><br></pre></td></tr></table></figure>
+<h3 id="小程序原生作用域获取"><a href="#小程序原生作用域获取" class="headerlink" title="小程序原生作用域获取"></a>小程序原生作用域获取</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 Taro 的页面和组件类中，this 指向的是 Taro 页面或组件的实例，例如</span></span><br><span class="line"><span class="keyword">import</span> Taro, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'@tarojs/taro'</span></span><br><span class="line"><span class="keyword">import</span> &#123; View &#125; <span class="keyword">from</span> <span class="string">'@tarojs/components'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Menu</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> defaultProps = &#123;</span><br><span class="line">    data: []</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      checked: props.checked</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentWillMount () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>) <span class="comment">// this -&gt; 组件 Menu 的实例</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">View</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>但是一般我们需要获取 Taro 的页面和组件所对应的小程序原生页面和组件的实例，这个时候我们可以通过 this.$scope 就能访问到它们。</p>
+<p>所以当调用一些 API 需要传入小程序的页面或者组件实例时，可以直接传入 this.$scope，例如 Taro.createCanvasContext(canvasId, this) 这个 API，第二个参数就是自定义组件实例 this，在 Taro 中就可以如下使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Taro.createCanvasContext(canvasId, <span class="keyword">this</span>.$scope)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/react/" rel="tag"># react</a>
+          
+            <a href="/blog/tags/Taro/" rel="tag"># Taro</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2019/11/27/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" rel="next" title="react生命周期">
+                <i class="fa fa-chevron-left"></i> react生命周期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2019/11/27/Taro%E4%BB%8B%E7%BB%8D/" rel="prev" title="Taro介绍">
+                Taro介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">jacob</p>
+              <p class="site-description motion-element" itemprop="description">我的地盘，我做主</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/blog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://jacob1811.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:jacob1811@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Taro"><span class="nav-number">1.</span> <span class="nav-text">Taro</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境要求"><span class="nav-number">1.1.</span> <span class="nav-text">环境要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLI-工具安装"><span class="nav-number">1.2.</span> <span class="nav-text">CLI 工具安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目初始化"><span class="nav-number">1.3.</span> <span class="nav-text">项目初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-number">1.4.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规范"><span class="nav-number">1.5.</span> <span class="nav-text">规范</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件命名"><span class="nav-number">1.5.1.</span> <span class="nav-text">文件命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最佳实践"><span class="nav-number">1.5.2.</span> <span class="nav-text">最佳实践</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSX-支持程度说明"><span class="nav-number">1.5.3.</span> <span class="nav-text">JSX 支持程度说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最佳编码方式"><span class="nav-number">1.5.4.</span> <span class="nav-text">最佳编码方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组件样式说明"><span class="nav-number">1.5.5.</span> <span class="nav-text">组件样式说明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#给组件设置-defaultProps"><span class="nav-number">1.5.5.1.</span> <span class="nav-text">给组件设置 defaultProps</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#组件传递函数属性名以-on-开头"><span class="nav-number">1.5.5.2.</span> <span class="nav-text">组件传递函数属性名以 on 开头</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#小程序端不要在组件中打印传入的函数"><span class="nav-number">1.5.5.3.</span> <span class="nav-text">小程序端不要在组件中打印传入的函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#小程序端不要将在模板中用到的数据设置为-undefined"><span class="nav-number">1.5.5.4.</span> <span class="nav-text">小程序端不要将在模板中用到的数据设置为 undefined</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#小程序端不要在组件中打印-this-props-children"><span class="nav-number">1.5.5.5.</span> <span class="nav-text">小程序端不要在组件中打印 this.props.children</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局变量"><span class="nav-number">2.</span> <span class="nav-text">全局变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由"><span class="nav-number">3.</span> <span class="nav-text">路由</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件的外部样式和全局样式"><span class="nav-number">3.1.</span> <span class="nav-text">组件的外部样式和全局样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部样式类"><span class="nav-number">3.2.</span> <span class="nav-text">外部样式类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局样式类"><span class="nav-number">3.3.</span> <span class="nav-text">全局样式类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jsx"><span class="nav-number">3.4.</span> <span class="nav-text">Jsx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔值、Null-和-Undefined-被忽略"><span class="nav-number">3.5.</span> <span class="nav-text">布尔值、Null 和 Undefined 被忽略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Taro-和-React-一样，也有一个严格的规则："><span class="nav-number">3.6.</span> <span class="nav-text">Taro 和 React 一样，也有一个严格的规则：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-PropTypes-检查类型"><span class="nav-number">3.6.1.</span> <span class="nav-text">使用 PropTypes 检查类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期-amp-State"><span class="nav-number">3.7.</span> <span class="nav-text">生命周期 &amp; State</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#状态更新一定是异步的"><span class="nav-number">3.7.1.</span> <span class="nav-text">状态更新一定是异步的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件处理"><span class="nav-number">3.8.</span> <span class="nav-text">事件处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#向事件处理程序传递参数"><span class="nav-number">3.8.1.</span> <span class="nav-text">向事件处理程序传递参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用匿名函数"><span class="nav-number">3.8.2.</span> <span class="nav-text">使用匿名函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#柯里化传参"><span class="nav-number">3.9.</span> <span class="nav-text">柯里化传参</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数式组件"><span class="nav-number">3.9.1.</span> <span class="nav-text">函数式组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任何组件的事件传递都要以-on-开头"><span class="nav-number">3.9.2.</span> <span class="nav-text">任何组件的事件传递都要以 on 开头</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表渲染"><span class="nav-number">3.10.</span> <span class="nav-text">列表渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与-React-的不同"><span class="nav-number">3.10.1.</span> <span class="nav-text">与 React 的不同</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式组件-1"><span class="nav-number">3.11.</span> <span class="nav-text">函数式组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类函数式组件"><span class="nav-number">3.12.</span> <span class="nav-text">类函数式组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包函数式组件"><span class="nav-number">3.13.</span> <span class="nav-text">闭包函数式组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Context"><span class="nav-number">4.</span> <span class="nav-text">Context</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#context使用"><span class="nav-number">4.0.1.</span> <span class="nav-text">context使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Children"><span class="nav-number">4.1.</span> <span class="nav-text">Children</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合"><span class="nav-number">4.2.</span> <span class="nav-text">组合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Render-Props"><span class="nav-number">4.2.1.</span> <span class="nav-text">Render Props</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REF"><span class="nav-number">4.3.</span> <span class="nav-text">REF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用字符串创建-ref"><span class="nav-number">4.3.1.</span> <span class="nav-text">使用字符串创建 ref</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过函数创建-ref"><span class="nav-number">4.3.2.</span> <span class="nav-text">通过函数创建 ref</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过-createRef-创建-ref"><span class="nav-number">4.4.</span> <span class="nav-text">通过 createRef 创建 ref</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跨平台开发"><span class="nav-number">4.5.</span> <span class="nav-text">跨平台开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统一接口的多端文件"><span class="nav-number">4.6.</span> <span class="nav-text">统一接口的多端文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多端组件"><span class="nav-number">4.6.1.</span> <span class="nav-text">多端组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多端脚本逻辑"><span class="nav-number">4.6.2.</span> <span class="nav-text">多端脚本逻辑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#app-js-中使用不同的-pages"><span class="nav-number">4.7.</span> <span class="nav-text">app.js 中使用不同的 pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多端同步调试"><span class="nav-number">4.8.</span> <span class="nav-text">多端同步调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小程序原生作用域获取"><span class="nav-number">4.9.</span> <span class="nav-text">小程序原生作用域获取</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jacob</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
