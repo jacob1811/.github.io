@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="es6," />
+
+
+
+
+
+  <link rel="alternate" href="/blog/atom.xml" title="芸豆blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="ClassECMAScript中没有类的概念，我们的实例是基于原型由构造函数生成具有动态属性和方法的对象。不过为了与国际接轨，描述的更为简便和高大上，依然会使用‘类’这一词。所以JS的类等同于构造函数。ES6的class只是个语法糖，其定义生成的对象依然构造函数。不过为了与构造函数模式区分开，我们称其为类模式。 123456789101112131415161718&#x2F;&#x2F; ---使用构造函数func">
+<meta name="keywords" content="es6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6的Class">
+<meta property="og:url" content="https:&#x2F;&#x2F;jacob1811.github.io&#x2F;blog&#x2F;2019&#x2F;11&#x2F;27&#x2F;es6%E7%9A%84Class&#x2F;index.html">
+<meta property="og:site_name" content="芸豆blog">
+<meta property="og:description" content="ClassECMAScript中没有类的概念，我们的实例是基于原型由构造函数生成具有动态属性和方法的对象。不过为了与国际接轨，描述的更为简便和高大上，依然会使用‘类’这一词。所以JS的类等同于构造函数。ES6的class只是个语法糖，其定义生成的对象依然构造函数。不过为了与构造函数模式区分开，我们称其为类模式。 123456789101112131415161718&#x2F;&#x2F; ---使用构造函数func">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-27T09:59:54.629Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jacob1811.github.io/blog/2019/11/27/es6的Class/"/>
+
+
+
+
+
+  <title>es6的Class | 芸豆blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">芸豆blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jacob1811.github.io/blog/blog/2019/11/27/es6%E7%9A%84Class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jacob">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芸豆blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">es6的Class</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-27T17:16:23+08:00">
+                2019-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h3><p>ECMAScript中没有类的概念，我们的实例是基于原型由构造函数生成具有动态属性和方法的对象。不过为了与国际接轨，描述的更为简便和高大上，依然会使用‘类’这一词。所以JS的类等同于构造函数。ES6的<code>class</code>只是个语法糖，其定义生成的对象依然构造函数。不过为了与构造函数模式区分开，我们称其为类模式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ---使用构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">C</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'New someone.'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">C.a = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="string">'a'</span>; &#125;; <span class="comment">// 静态方法</span></span><br><span class="line"></span><br><span class="line">C.prototype.b = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="string">'b'</span>; &#125;; <span class="comment">// 原型方法</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ---使用class</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> a() &#123; <span class="keyword">return</span> <span class="string">'a'</span>; &#125; <span class="comment">// 静态方法</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">constructor</span>() &#123; <span class="built_in">console</span>.log(<span class="string">'New someone.'</span>); &#125; <span class="comment">// 构造方法</span></span><br><span class="line">  </span><br><span class="line">  b() &#123; <span class="keyword">return</span> <span class="string">'b'</span>; &#125; <span class="comment">// 原型方法</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="与变量对比"><a href="#与变量对比" class="headerlink" title="与变量对比"></a>与变量对比</h4><ol>
+<li>关键字class类似定义函数的关键字function，其定义的方式有声明式和表达式（匿名式和命名式）两种。</li>
+<li>通过声明式定义的变量的性质与function不同，更为类似let和const，不会提前解析，不存在变量提升，不与全局作用域挂钩和拥有暂时性死区3. 等。class定义生成的变量就是一个构造函数，也因此，类可以写成立即执行的模式。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ---声明式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ---匿名表达式</span></span><br><span class="line"><span class="keyword">let</span> C = <span class="class"><span class="keyword">class</span> </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">let</span> F = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ---命名表达式</span></span><br><span class="line"><span class="keyword">let</span> C = <span class="class"><span class="keyword">class</span> <span class="title">CC</span> </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">let</span> F = <span class="function"><span class="keyword">function</span> <span class="title">FF</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ---本质是个函数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> C); <span class="comment">// function</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(C)); <span class="comment">// [object Function]</span></span><br><span class="line"><span class="built_in">console</span>.log(C.hasOwnProperty(<span class="string">'prototype'</span>)); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ---不存在变量提升</span></span><br><span class="line">C; <span class="comment">// 报错，不存在C。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;&#125;</span><br><span class="line"><span class="comment">// 存在提前解析和变量提升</span></span><br><span class="line">F; <span class="comment">// 不报错，F已被声明和赋值。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ---自执行模式</span></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> (<span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<h4 id="与对象对比"><a href="#与对象对比" class="headerlink" title="与对象对比"></a>与对象对比</h4><p>类内容（{}里面）的形式与对象字面量相似。</p>
+<ol>
+<li>不过类内容里面只能定义方法不能定义属性，es6类没有静态属性（es7才可以）</li>
+<li>方法的形式只能是函数简写式，方法间不用也不能用逗号分隔。</li>
+<li>方法名可以是带括号的表达式，也可以为Symbol值。</li>
+<li>方法分为三类，构造方法（constructor方法）、原型方法（存在于构造函数的prototype属性上）和静态方法（存在于构造函数本身上）</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 原型方法a</span></span><br><span class="line">  a() &#123; <span class="built_in">console</span>.log(<span class="string">'a'</span>); &#125;</span><br><span class="line">  <span class="comment">// 构造方法，每次生成实例时都会被调用并返回新实例。</span></span><br><span class="line">  <span class="keyword">constructor</span>() &#123;&#125;</span><br><span class="line">  <span class="comment">// 静态方法b，带static关键字。</span></span><br><span class="line">  <span class="keyword">static</span> b() &#123; <span class="built_in">console</span>.log(<span class="string">'b'</span>); &#125;</span><br><span class="line">  <span class="comment">// 原型方法，带括号的表达式</span></span><br><span class="line">  [<span class="string">'a'</span> + <span class="string">'b'</span>]() &#123; <span class="built_in">console</span>.log(<span class="string">'ab'</span>); &#125;</span><br><span class="line">  <span class="comment">// 原型方法，使用Symbol值</span></span><br><span class="line">  [<span class="built_in">Symbol</span>.for(<span class="string">'s'</span>)]() &#123; <span class="built_in">console</span>.log(<span class="string">'symbol s'</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">C.b(); <span class="comment">// b</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> C();</span><br><span class="line">c.a(); <span class="comment">// a</span></span><br><span class="line">c.ab(); <span class="comment">// ab</span></span><br><span class="line">c[<span class="built_in">Symbol</span>.for(<span class="string">'s'</span>)](); <span class="comment">// symbol s</span></span><br></pre></td></tr></table></figure>
+
+<p>不能直接定义属性，并不表示类不能有原型或静态属性。解析class会形成一个构造函数，因此只需像为构造函数添加属性一样为类添加即可。更为直接也是推荐的是只使用getter函数定义只读属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ---直接在C类（构造函数）上修改</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;&#125;</span><br><span class="line">C.a = <span class="string">'a'</span>;</span><br><span class="line">C.b = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="string">'b'</span>; &#125;;</span><br><span class="line">C.prototype.c = <span class="string">'c'</span>;</span><br><span class="line">C.prototype.d = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="string">'d'</span>; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> C();</span><br><span class="line">c.c; <span class="comment">// c</span></span><br><span class="line">c.d(); <span class="comment">// d</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ---使用setter和getter</span></span><br><span class="line"><span class="comment">// 定义只能获取不能修改的原型或静态属性</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">  <span class="keyword">get</span> a() &#123; <span class="keyword">return</span> <span class="string">'a'</span>; &#125;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">get</span> b() &#123; <span class="keyword">return</span> <span class="string">'b'</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> C();</span><br><span class="line">c.a; <span class="comment">// a</span></span><br><span class="line">c.a = <span class="string">'1'</span>; <span class="comment">// 赋值没用，只有get没有set无法修改。</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="与构造函数对比"><a href="#与构造函数对比" class="headerlink" title="与构造函数对比"></a>与构造函数对比</h4><p>直观上，class简化了代码，使得内容更为聚合。constructor方法体等同构造函数的函数体，如果没有显式定义此方法，一个空的constructor方法会被默认添加用于返回新的实例。与ES5一样，也可以自定义返回另一个对象而不是新实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ---构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">C</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.a = a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态属性和方法</span></span><br><span class="line">C.b = <span class="string">'b'</span>;</span><br><span class="line">C.c = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="string">'c'</span>; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原型属性和方法</span></span><br><span class="line">C.prototype.d = <span class="string">'d'</span>;</span><br><span class="line">C.prototype.e = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="string">'e'</span>; &#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(C.prototype, <span class="string">'f'</span>, &#123; <span class="comment">// 只读属性</span></span><br><span class="line">  <span class="keyword">get</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'f'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ---类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> c() &#123; <span class="keyword">return</span> <span class="string">'c'</span>; &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">constructor</span>(a) &#123;</span><br><span class="line">    <span class="keyword">this</span>.a = a;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  e() &#123; <span class="keyword">return</span> <span class="string">'e'</span>; &#125;</span><br><span class="line">  <span class="keyword">get</span> f() &#123; <span class="keyword">return</span> <span class="string">'f'</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">C.b = <span class="string">'b'</span>;</span><br><span class="line">C.prototype.d = <span class="string">'d'</span>;</span><br></pre></td></tr></table></figure>
+<p>类虽然是个函数，但只能通过new生成实例而不能直接调用。类内部所定义的全部方法是不可枚举的，在构造函数本身和prototype上添加的属性和方法是可枚举的。类内部定义的方法默认是严格模式，无需显式声明。以上三点增加了类的严谨性，比较遗憾的是，依然还没有直接定义私有属性和方法的方式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ---能否直接调用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;&#125;</span><br><span class="line">C(); <span class="comment">// 报错</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">C</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">C(); <span class="comment">// 可以</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ---是否可枚举</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> a() &#123;&#125; <span class="comment">// 不可枚举</span></span><br><span class="line">  b() &#123;&#125; <span class="comment">// 不可枚举</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">C.c = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;; <span class="comment">// 可枚举</span></span><br><span class="line">C.prototype.d = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;; <span class="comment">// 可枚举</span></span><br><span class="line"></span><br><span class="line">isEnumerable(C, [<span class="string">'a'</span>, <span class="string">'c'</span>]); <span class="comment">// a false, c true</span></span><br><span class="line">isEnumerable(C.prototype, [<span class="string">'b'</span>, <span class="string">'d'</span>]); <span class="comment">// b false, d true</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isEnumerable</span>(<span class="params">target, keys</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> obj = <span class="built_in">Object</span>.getOwnPropertyDescriptors(target);</span><br><span class="line">  keys.forEach(<span class="function"><span class="params">k</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(k, obj[k].enumerable);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ---是否为严格模式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">  a() &#123;</span><br><span class="line">    <span class="keyword">let</span> is = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      n = <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">      is = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(is ? <span class="string">'true'</span> : <span class="string">'false'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">C.prototype.b = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> is = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    n = <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    is = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(is ? <span class="string">'true'</span> : <span class="string">'false'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> C();</span><br><span class="line">c.a(); <span class="comment">// true，是严格模式。</span></span><br><span class="line">c.b(); <span class="comment">// false，不是严格模式。</span></span><br></pre></td></tr></table></figure>
+
+<p>在方法前加上static关键字表示此方法为静态方法，它存在于类本身，不能被实例直接访问。静态方法中的this指向类本身。因为处于不同对象上，静态方法和原型方法可以重名。ES6新增了一个命令new.target，指代new后面的构造函数或class，该命令的使用有某些限制，具体请看下面示例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ---static</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> a() &#123; <span class="built_in">console</span>.log(<span class="keyword">this</span> === C); &#125;</span><br><span class="line">  a() &#123; <span class="built_in">console</span>.log(<span class="keyword">this</span> <span class="keyword">instanceof</span> C); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> C();</span><br><span class="line">C.a(); <span class="comment">// true</span></span><br><span class="line">c.a(); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ---new.target</span></span><br><span class="line"><span class="comment">// 构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">C</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">new</span>.target);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">C.prototype.a = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="keyword">new</span>.target); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> C(); <span class="comment">// 打印出C</span></span><br><span class="line">c.a(); <span class="comment">// 在普通方法中为undefined。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ---类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123; <span class="built_in">console</span>.log(<span class="keyword">new</span>.target); &#125;</span><br><span class="line">  a() &#123; <span class="built_in">console</span>.log(<span class="keyword">new</span>.target); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> C(); <span class="comment">// 打印出C</span></span><br><span class="line">c.a(); <span class="comment">// 在普通方法中为undefined。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ---在函数外部使用会报错</span></span><br><span class="line"><span class="keyword">new</span>.target; <span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
+<h2 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h2><p>ES5中的经典继承方法是寄生组合式继承，子类会分别继承父类实例和原型上的属性和方法。ES6中的继承本质也是如此，不过实现方式有所改变，具体如下面的代码。可以看到，原型上的继承是使用extends关键字这一更接近传统语言的形式，实例上的继承是通过调用super完成子类this塑造。表面上看，方式更为的统一和简洁。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C1</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(a) &#123; <span class="keyword">this</span>.a = a; &#125;</span><br><span class="line">  b() &#123; <span class="built_in">console</span>.log(<span class="string">'b'</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">C1</span> </span>&#123; <span class="comment">// 继承原型数据</span></span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>(<span class="string">'a'</span>); <span class="comment">// 继承实例数据</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="与构造函数对比-1"><a href="#与构造函数对比-1" class="headerlink" title="与构造函数对比"></a>与构造函数对比</h4><p>使用extends继承，不仅仅会将子类的prototype属性的原型对象（<strong>proto</strong>）设置为父类的prototype，还会将子类本身的原型对象（<strong>proto</strong>）设置为父类本身。这意味着子类不单单会继承父类的原型数据，也会继承父类本身拥有的静态属性和方法。而ES5的经典继承只会继承父类的原型数据。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C1</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">get</span> a() &#123; <span class="built_in">console</span>.log(<span class="string">'a'</span>); &#125;</span><br><span class="line">  <span class="keyword">static</span> b() &#123; <span class="built_in">console</span>.log(<span class="string">'b'</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">C1</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价，没有构造方法会默认添加。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">C1</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(...args) &#123;</span><br><span class="line">    <span class="keyword">super</span>(...args);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> C();</span><br><span class="line">C.a; <span class="comment">// a，继承了父类的静态属性。</span></span><br><span class="line">C.b(); <span class="comment">// b，继承了父类的静态方法。</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(C) === C1); <span class="comment">// true，C的原型对象为C1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(C.prototype) === C1.prototype); <span class="comment">// true，C的prototype属性的原型对象为C1的prototype</span></span><br></pre></td></tr></table></figure>
+<p>ES5中的实例继承，是先创造子类的实例对象this，再通过call或apply方法，在this上添加父类的实例属性和方法。当然也可以选择不继承父类的实例数据。而ES6不同，它的设计使得实例继承更为优秀和严谨。</p>
+<p>在ES6的实例继承中，是先调用super方法创建父类的this（依旧指向子类）和添加父类的实例数据，再通过子类的构造函数修饰this，与ES5正好相反。ES6规定在子类的constructor方法里，在使用到this之前，必须先调用super方法得到子类的this。不调用super方法，意味着子类得不到this对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C1</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'C1'</span>, <span class="keyword">this</span> <span class="keyword">instanceof</span> C);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">C1</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>(); <span class="comment">// 在super()之前不能使用this，否则报错。</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'C'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> C(); <span class="comment">// 先打印出C1 true，再打印C。</span></span><br></pre></td></tr></table></figure>
+<h5 id="super"><a href="#super" class="headerlink" title="super"></a>super</h5><p>关键字super比较奇葩，在不同的环境和使用方式下，它会指代不同的东西（总的说可以指代对象或方法两种）。而且在不显式的指明是作为对象或方法使用时，比如console.log(super)，会直接报错。</p>
+<p>作为函数时。super只能存在于子类的构造方法中，这时它指代父类构造函数。</p>
+<p>作为对象时。super在静态方法中指代父类本身，在构造方法和原型方法中指代父类的prototype属性。不过通过super调用父类方法时，方法的this依旧指向子类。即是说，通过super调用父类的静态方法时，该方法的this指向子类本身；调用父类的原型方法时，该方法的this指向该（子类的）实例。而且通过super对某属性赋值时，在子类的原型方法里指代该实例，在子类的静态方法里指代子类本身，毕竟直接在子类中通过super修改父类是很危险的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C1</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> a() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span> === C);</span><br><span class="line">  &#125;</span><br><span class="line">  b() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span> <span class="keyword">instanceof</span> C);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">C1</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> c() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">super</span>.a); <span class="comment">// 此时super指向C1，打印出function a。</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">this</span>.x = <span class="number">2</span>; <span class="comment">// this等于C。</span></span><br><span class="line">    <span class="keyword">super</span>.x = <span class="number">3</span>; <span class="comment">// 此时super等于this，即C。</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">super</span>.x); <span class="comment">// 此时super指向C1，打印出undefined。</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x); <span class="comment">// 值已改为3。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">super</span>.a(); <span class="comment">// 打印出true，a方法的this指向C。</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>(); <span class="comment">// 指代父类的构造函数</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">super</span>.c); <span class="comment">// 此时super指向C1.prototype，打印出function c。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.x = <span class="number">2</span>; <span class="comment">// this等于新实例。</span></span><br><span class="line">    <span class="keyword">super</span>.x = <span class="number">3</span>; <span class="comment">// 此时super等于this，即实例本身。</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">super</span>.x); <span class="comment">// 此时super指向C1.prototype，打印出undefined。</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x); <span class="comment">// 值已改为3。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">super</span>.b(); <span class="comment">// 打印出true，b方法的this指向实例本身。</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="继承原生构造函数"><a href="#继承原生构造函数" class="headerlink" title="继承原生构造函数"></a>继承原生构造函数</h4><p>使用构造函数模式，构建继承了原生数据结构（比如Array）的子类，有许多缺陷的。一方面由上文可知，原始继承是先创建子类this，再通过父类构造函数进行修饰，因此无法获取到父类的内部属性（隐藏属性）。另一方面，原生构造函数会直接忽略call或apply方法传入的this，导致子类根本无法获取到父类的实例属性和方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyArray</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">Array</span>.apply(<span class="keyword">this</span>, args);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyArray.prototype = <span class="built_in">Array</span>.prototype;</span><br><span class="line"><span class="comment">// MyArray.prototype.constructor = MyArray;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = <span class="keyword">new</span> MyArray(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// arr为对象，没有储存值。</span></span><br><span class="line">arr.push(<span class="number">4</span>, <span class="number">5</span>); <span class="comment">// 在arr上新增了0，1和length属性。</span></span><br><span class="line">arr.map(<span class="function"><span class="params">d</span> =&gt;</span> d); <span class="comment">// 返回数组[4, 5]</span></span><br><span class="line">arr.length = <span class="number">1</span>; <span class="comment">// arr并没有更新，依旧有0，1属性，且arr[1]为5。</span></span><br></pre></td></tr></table></figure>
+<p>创建类的过程，是先构造一个属于父类却指向子类的this（绕口），再通过父类和子类的构造函数进行修饰。因此可以规避构造函数的问题，获取到父类的实例属性和方法，包括内部属性。进而真正的创建原生数据结构的子类，从而简单的扩展原生数据类型。另外还可以通过设置Symbol.species属性，使得衍生对象为原生类而不是自定义子类的实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyArray</span> <span class="keyword">extends</span> <span class="title">Array</span> </span>&#123; <span class="comment">// 实现是如此的简单</span></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">get</span> [Symbol.species]() &#123; <span class="keyword">return</span> <span class="built_in">Array</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = <span class="keyword">new</span> MyArray(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// arr为数组，储存有1，2，3。</span></span><br><span class="line">arr.map(<span class="function"><span class="params">d</span> =&gt;</span> d); <span class="comment">// 返回数组[1, 2, 3]</span></span><br><span class="line">arr.length = <span class="number">1</span>; <span class="comment">// arr正常更新，已包含必要的内部属性。</span></span><br></pre></td></tr></table></figure>
+<p>需要注意的是继承Object的子类。ES6改变了Object构造函数的行为，一旦发现其不是通过new Object()这种形式调用的，构造函数会忽略传入的参数。由此导致Object子类无法正常初始化，但这不是个大问题。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObject</span> <span class="keyword">extends</span> <span class="title">Object</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">get</span> [Symbol.species]() &#123; <span class="keyword">return</span> <span class="built_in">Object</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> o = <span class="keyword">new</span> MyObject(&#123; <span class="attr">id</span>: <span class="number">1</span> &#125;);</span><br><span class="line"><span class="built_in">console</span>.log(o.hasOwnPropoty(<span class="string">'id'</span>)); <span class="comment">// false，没有被正确初始化</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/es6/" rel="tag"># es6</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2019/11/27/Taro-cli%E6%8B%86%E8%A7%A3/" rel="next" title="Taro-cli拆解">
+                <i class="fa fa-chevron-left"></i> Taro-cli拆解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2019/11/27/getter-setter/" rel="prev" title="getter-setter">
+                getter-setter <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">jacob</p>
+              <p class="site-description motion-element" itemprop="description">我的地盘，我做主</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/blog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://jacob1811.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:jacob1811@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Class"><span class="nav-number">1.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与变量对比"><span class="nav-number">1.1.</span> <span class="nav-text">与变量对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与对象对比"><span class="nav-number">1.2.</span> <span class="nav-text">与对象对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与构造函数对比"><span class="nav-number">1.3.</span> <span class="nav-text">与构造函数对比</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extends"><span class="nav-number"></span> <span class="nav-text">extends</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与构造函数对比-1"><span class="nav-number">0.1.</span> <span class="nav-text">与构造函数对比</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#super"><span class="nav-number">0.1.1.</span> <span class="nav-text">super</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承原生构造函数"><span class="nav-number">0.2.</span> <span class="nav-text">继承原生构造函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jacob</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
