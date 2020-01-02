@@ -81,15 +81,15 @@
 
 
 
-<meta name="description" content="性能优化来一波">
+<meta name="description" content="1、 不要在渲染函数（render）进行不必要的计算比如，数组排序、数组转换、订阅事件、创建事件处理器等，宗旨是不放置太多副作用 2、 减少不必要的嵌套理性选择工具，比如适当使用原生css、减少react运行时负担。大部分不必要的节点嵌套都是滥用高阶组件&#x2F;renderProps导致的，只有在必要的时候才使用XXX。替代方案有：props、React Hooks 3、虚拟列表使用场景：  无限滚动列">
 <meta name="keywords" content="react">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react优化">
 <meta property="og:url" content="https:&#x2F;&#x2F;jacob1811.github.io&#x2F;blog&#x2F;2019&#x2F;11&#x2F;18&#x2F;react%E4%BC%98%E5%8C%96&#x2F;index.html">
 <meta property="og:site_name" content="芸豆blog">
-<meta property="og:description" content="性能优化来一波">
+<meta property="og:description" content="1、 不要在渲染函数（render）进行不必要的计算比如，数组排序、数组转换、订阅事件、创建事件处理器等，宗旨是不放置太多副作用 2、 减少不必要的嵌套理性选择工具，比如适当使用原生css、减少react运行时负担。大部分不必要的节点嵌套都是滥用高阶组件&#x2F;renderProps导致的，只有在必要的时候才使用XXX。替代方案有：props、React Hooks 3、虚拟列表使用场景：  无限滚动列">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-18T11:35:09.008Z">
+<meta property="og:updated_time" content="2019-12-27T07:04:30.336Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -342,7 +342,19 @@
       
 
       
-        <p>性能优化来一波</p>
+        <p>1、 不要在渲染函数（render）进行不必要的计算<br>比如，数组排序、数组转换、订阅事件、创建事件处理器等，宗旨是不放置太多副作用</p>
+<p>2、 减少不必要的嵌套<br>理性选择工具，比如适当使用原生css、减少react运行时负担。大部分不必要的节点嵌套都是滥用高阶组件/renderProps导致的，只有在必要的时候才使用XXX。<br>替代方案有：props、React Hooks</p>
+<p>3、虚拟列表<br>使用场景：</p>
+<ul>
+<li>无限滚动列表、 grid、表格、下拉列表、spreadsheets</li>
+<li>无限切换的日历或轮播图</li>
+<li>大数据量或者无限嵌套的树</li>
+<li>聊天窗、数据流、时间轴</li>
+<li>…</li>
+</ul>
+<p><a href="https://github.com/bvaughn/react-virtualized" target="_blank" rel="noopener">react-virtualized</a></p>
+<p>antd配合推荐：（精灵使用、有新增hooks方式）</p>
+<p><a href="https://github.com/wubostc/virtualized-table-for-antd" target="_blank" rel="noopener">virtualizedtableforantd</a></p>
 
       
     </div>
@@ -373,7 +385,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2019/11/18/react-base/" rel="next" title="react-base">
+              <a href="/blog/2019/11/18/react-%E9%BB%91%E7%A7%91%E6%8A%80/" rel="next" title="react-base">
                 <i class="fa fa-chevron-left"></i> react-base
               </a>
             
@@ -453,7 +465,7 @@
               
                 <a href="/blog/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -535,7 +547,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
