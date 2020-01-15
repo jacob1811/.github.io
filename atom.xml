@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://jacob1811.github.io/blog/"/>
-  <updated>2019-12-31T12:06:41.578Z</updated>
+  <updated>2020-01-14T22:09:24.773Z</updated>
   <id>https://jacob1811.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,76 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>js_deep</title>
+    <link href="https://jacob1811.github.io/blog/2020/01/11/js-deep/"/>
+    <id>https://jacob1811.github.io/blog/2020/01/11/js-deep/</id>
+    <published>2020-01-11T15:38:58.000Z</published>
+    <updated>2020-01-14T22:09:24.773Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、if块级下 var 的作用域提升<br>var web = “houdunren”;<br>function hd() {<br>  if (false) {<br>    var web = “后盾人”;<br>  }<br>  console.log(web);<br>}<br>hd();</p><p>2、 do while<br>var num = 0;</p><p>function show() {<br>  var step = 10;<br>  do {<br>    var res = 0;<br>    console.log(num = step++);<br>    res = num;<br>  } while (step &lt; 20);<br>  console.log(<code>结果是${res}</code>);<br>}<br>show();</p><p>3、防止全局污染<br>// var<br>(function(){<br>  var $ = (window.$ = {});<br>  $.web = “后盾人”;<br>  var url = ‘baidu.com’<br>  $.getUrl=function(){<br>    return url<br>  }<br>}.bind(window)())</p><p>// let<br> {<br>  let $ = (window.$ = {});<br>  $.web = “后盾人”;<br>  let url = ‘baidu.com’<br>  $.getUrl=function(){<br>    return url<br>  }<br>}<br>console.log($.web);<br>console.log($.getUrl())<br>console.log($.url)</p><p>4、常量不允许全新赋值举例</p><p>const INFO = {<br>  url: ‘<a href="https://www.houdunren.com&#39;" target="_blank" rel="noopener">https://www.houdunren.com&#39;</a>,<br>  port: ‘8080’<br>};<br>INFO.port = ‘443’;<br>console.log(INFO);</p><p>5、freeze<br>“use strict”<br>const INFO = {<br>  url: ‘<a href="https://www.houdunren.com&#39;" target="_blank" rel="noopener">https://www.houdunren.com&#39;</a>,<br>  port: ‘8080’<br>};<br>Object.freeze(INFO);<br>INFO.port = ‘443’; //Cannot assign to read only property<br>console.log(INFO);</p><p>6、(function () {<br>  “use strict”;<br>  url = ‘houdunren.com’;<br>})();</p><p>7、 运算符 n++ ++n<br>let a = 1;<br>b = a++ + 2;<br>console.log(b); //3</p><p>let a = 1;<br>b = ++a + 2;<br>console.log(b); //4</p><p>8、switch<br>可以将 switch 理解为 if 的另一种结构清晰的写法。</p><p>如果表达式等于 case 中的值，将执行此 case 代码段<br>break 关键字会终止 switch 的执行<br>没有任何 case匹配时将执行default 代码块<br>如果case执行后缺少break则接着执行后面的语句</p><p>let name = ‘视频’;<br>switch (name) {<br>    case ‘产品’:<br>        console.log(‘hdcms.com’);<br>        break;<br>    case ‘视频’:<br>        console.log(‘houdunren.com’);<br>        break;<br>    default:<br>        console.log(‘houdunwang.com’)<br>}</p><p>9、杨辉三角</p><p>for (let i = 1; i &lt;= 5; i++) {<br>  for (let n = 5 - i; n &gt; 0; n–) {<br>      document.write(‘^’);<br>  }<br>  for (let m = i * 2 - 1; m &gt; 0; m–) {<br>      document.write(‘*’);<br>  }<br>  document.write(“<br/>“);<br>}<br>10、break/continue<br>for (let i = 1; i &lt;= 10; i++) {<br>  if (i % 2) continue;<br>  console.log(i);<br>}</p><p>let count = 0,num = 3;<br>for (let i = 1; i &lt;= 10; i++) {<br>  if (i % 2) {<br>    console.log(i);<br>    if (++count == num) break;<br>  }<br>}</p><p>11、标签(label) 为程序定义位置，可以使用continue/break跳到该位置。</p><p>下面取i+n 大于15时退出循环</p><p>houdunren: for (let i = 1; i &lt;= 10; i++) {<br>  hdcms: for (let n = 1; n &lt;= 10; n++) {<br>    if (n % 2 != 0) {<br>      continue hdcms;<br>    }<br>    console.log(i, n);<br>    if (i + n &gt; 15) {<br>      break houdunren;<br>    }<br>  }<br>}</p><p>12、for/in  for/of<br>for/in  用于遍历对象的所有属性，for/in主要用于遍历对象，不建议用来遍历数组。<br> for/of 用来遍历 Arrays（数组）, Strings（字符串）, Maps（映射）, Sets（集合）等可迭代的数据结构。</p><p> const hd = [“hdcms”, “houdunren”];</p><p>for (const [key, value] of hd.entries()) {<br>  console.log(key, value); //这样就可以遍历了<br>}</p><p>14、密码需要 trim()<br>event.preventDefault() 阻止默认提交</p><p>15、typeof instanceOf<br>返回：基本类型：number/string/boolean<br>      function<br>      object {数组、对象}<br>      undefined</p><p>let hd = [];<br>let houdunren = {};<br>console.log(hd instanceof Array); //true<br>console.log(houdunren instanceof Array); //false</p><p>function User() {}<br>let hd = new User();<br>console.log(hd instanceof User); //true</p><p>16、转义<br>常用转义符号列表如下</p><p>符号    说明<br>\t    制表符<br>\n    换行<br>\    斜杠符号<br>&#39;    单引号<br>&quot;    双引号R</p><p>17、标签模板<br>let lesson = ‘css’;<br>let web = ‘后盾人’;<br>tag <code>访问${web}学习${lesson}前端知识</code>;</p><p>function tag(strings, …values) {<br>    console.log(strings); //[“访问”, “学习”, “前端知识”]<br>    console.log(values); // [“后盾人”, “css”]<br>}</p><p>let lessons = [<br>  { title: “后盾人媒体查询响应式布局”, author: “后盾人向军” },<br>  { title: “FLEX 弹性盒模型”, author: “后盾人” },<br>  { title: “GRID 栅格系统后盾人教程”, author: “古老师” }<br>];</p><p>下面例子将标题中有后盾人的使用标签模板加上链接</p><p>function links(strings, …vars) {<br>  return strings<br>    .map((str, key) =&gt; {<br>      return (<br>        str +<br>        (vars[key]<br>          ? vars[key].replace(<br>              “后盾人”,<br>              <code>&lt;a href=&quot;https://www.houdunren.com&quot;&gt;后盾人&lt;/a&gt;</code><br>            )<br>          : “”)<br>      );<br>    })<br>    .join(“”);<br>}</p><p>function template() {<br>  return <code>&lt;ul&gt;    ${lessons      .map(item =&gt; links</code><li>${item.author}:${item.title}</li>`)<br>      .join(“”)}</p></ul>`;}document.body.innerHTML += template();<p>18、 trimLeft()  trimRight() toUpperCase toLowerCase<br>console.log(‘houdunren.com’.toUpperCase()); //HOUDUNREN.COM<br>console.log(‘houdunren.com’.toLowerCase()); //houdunren.com</p><p>19、截取字符串 slice、substr、substring<br>slice、substring 第二个参数为截取的结束位置<br>substr 第二个参数指定获取字符数量</p><p>20、lastIndexOf search  includes replace repeat</p><p>let str = “houdunren.com”;<br>console.log(str.search(“com”));<br>console.log(str.search(/.com/i));</p><p>search() 方法用于检索字符串中指定的子字符串，也可以使用正则表达式搜索</p><p>includes 字符串中是否包含指定的值，第二个参数指查找开始位置</p><p>startsWith 是否是指定位置开始，第二个参数为查找的开始位置。</p><p>endsWith 是否是指定位置结束，第二个参数为查找的结束位置。</p><p>replace 方法用于字符串的替换操作</p><p>let str = “2023/02/12”;<br>console.log(str.replace(///g, “-“));</p><p>function star(num = 3) {<br>    return ‘*’.repeat(num);<br>}<br>console.log(star());</p><p>21、 模糊后三位电话<br>let phone = “98765432101”;<br>console.log(phone.slice(0, -3) + “*”.repeat(3));</p><p>22、基本上所有类型都可以隐式转换为 Boolean类型。</p><p>数据类型    true    false<br>String    非空字符串    空字符串<br>Number    非0的数值    0 、NaN<br>Array    数组不参与比较时    参与比较的空数组<br>Object    所有对象<br>undefined    无    undefined<br>null    无    null<br>NaN    无    NaN</p><p>当与boolean类型比较时，会将两边类型统一为数字1或0。</p><h3 id="数值与boolean比较时，-会进行隐式类型转换-true-转为-1，false-转为0。-转number"><a href="#数值与boolean比较时，-会进行隐式类型转换-true-转为-1，false-转为0。-转number" class="headerlink" title="数值与boolean比较时，  会进行隐式类型转换 true 转为 1，false 转为0。(转number)"></a>数值与boolean比较时，  会进行隐式类型转换 true 转为 1，false 转为0。(转number)</h3><p>console.log(3 == true); //false<br>console.log(0 == false); //true</p><h3 id="字符串在与Boolean比较时，两边都为转换为数值类型后再进行比较。-转number"><a href="#字符串在与Boolean比较时，两边都为转换为数值类型后再进行比较。-转number" class="headerlink" title="字符串在与Boolean比较时，两边都为转换为数值类型后再进行比较。(转number)"></a>字符串在与Boolean比较时，两边都为转换为数值类型后再进行比较。(转number)</h3><p>console.log(Number(“houdunren”)); //NaN<br>console.log(Boolean(“houdunren”)); //true   字符串为真，参与隐式比较，不等于true<br>console.log(“houdunren” == true); //false<br>console.log(“1” == true); //true</p><h3 id="数组的表现与字符串原理一样，在与Boolean比较时-会先转换为数值"><a href="#数组的表现与字符串原理一样，在与Boolean比较时-会先转换为数值" class="headerlink" title="数组的表现与字符串原理一样，在与Boolean比较时,会先转换为数值"></a>数组的表现与字符串原理一样，在与Boolean比较时,会先转换为数值</h3><p>console.log(Number([])); //0<br>console.log(Number([3])); //3<br>console.log(Number([1, 2, 3])); //NaN<br>console.log([] == false); //true<br>console.log([1] == true); //true<br>console.log([1, 2, 3] == true); //false<br>console.log(Number({}));    //NaN</p><h3 id="引用类型的Boolean值为真，如对象和数组"><a href="#引用类型的Boolean值为真，如对象和数组" class="headerlink" title="引用类型的Boolean值为真，如对象和数组"></a>引用类型的Boolean值为真，如对象和数组</h3><p>if ([]) console.log(“true”); (空数组，空对象为真)<br>if ({}) console.log(“true”);</p><p>23、显式转换</p><p>使用 !! 转换布尔类型</p><p>使用 Boolean 函数可以显式转换为布尔类型</p><p>24、实例操作</p><p>下面使用Boolean类型判断用户的输入，并给出不同的反馈。<br>while (true) {<br>  let n = prompt(“请输入后盾人成立年份”).trim();<br>  if (!n) continue;<br>  alert(n == 2010 ? “回答正确” : “答案错误！看看官网了解下”);<br>  break;<br>}</p><p>25、isInteger  toFixed<br>console.log(Number.isInteger(1.2));</p><p>console.log((16.556).toFixed(2)); // 16.56 （四舍五入）<br>console.log((16.554).toFixed(2)) // 16.55</p><p>26、NaN isNaN Object.is<br>var res = 2 / ‘houdunren’;<br>if (Number.isNaN(res)) {<br>    console.log(‘Error’);<br>}</p><p>var res = 2 / ‘houdunren’;<br>console.log(Object.is(res, NaN));</p><p>26、parseInt parseFloat<br>console.log(parseInt(‘  99houdunren’));    //99<br>console.log(parseInt(‘18.55’));    //18</p><p>console.log(parseFloat(‘  99houdunren’));    //99<br>console.log(parseFloat(‘18.55’));    //18.55</p><p>27、 max,min ceil 上取整 floor 下取整 round 四舍五入<br>     random 方法用于返回 &gt;=0 且 &lt;1 的随机数（包括0但不包括1）。</p><p>console.log(Math.max.apply(Math, [1, 2, 3]));</p><p>28、 date<br>let now = new Date();<br>console.log(now);<br>console.log(typeof date); //object<br>console.log(now * 1); //获取时间戳</p><p>let hd = new Date(“2020-2-22 10:33:12”);</p><p>console.log(hd * 1);</p><p>console.log(Number(hd));</p><p>console.log(hd.valueOf())</p><p>console.log(date.getTime());</p><p>29、<br>let time = new Date();<br>console.log(<br>  <code>${time.getFullYear()}-${time.getMonth()}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}</code><br>);<br>// 2020-0-13 2:25:6</p><p>function dateFormat(date, format = “YYYY-MM-DD HH:mm:ss”) {<br>  const config = {<br>    YYYY: date.getFullYear(),<br>    MM: date.getMonth(),<br>    DD: date.getDate(),<br>    HH: date.getHours(),<br>    mm: date.getMinutes(),<br>    ss: date.getSeconds()<br>  };<br>  for (const key in config) {<br>    format = format.replace(key, config[key]);<br>  }<br>  return format;<br>}<br>console.log(dateFormat(new Date(), “YYYY年MM月DD日”));</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1、if块级下 var 的作用域提升&lt;br&gt;var web = “houdunren”;&lt;br&gt;function hd() {&lt;br&gt;  if (false) {&lt;br&gt;    var web = “后盾人”;&lt;br&gt;  }&lt;br&gt;  console.log(web);&lt;b
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>test</title>
+    <link href="https://jacob1811.github.io/blog/2020/01/11/test/"/>
+    <id>https://jacob1811.github.io/blog/2020/01/11/test/</id>
+    <published>2020-01-10T16:36:44.623Z</published>
+    <updated>2020-01-10T16:39:41.065Z</updated>
+    
+    <content type="html"><![CDATA[const call = (key, ...args) => context => context[key](...args);Promise.resolve([1, 2, 3])  .then(call('map', x => 2 * x))  .then(console.log); //[ 2, 4, 6 ]const map = call.bind(null, 'map');Promise.resolve([1, 2, 3])  .then(map(x => 2 * x))  .then(console.log); //[ 2, 4, 6 ]]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        
+const call = (key, ...args) =&gt; context =&gt; context[key](...args);
+Promise.resolve([1, 2, 3])
+  .then(call(&#39;map&#39;, x =&gt; 2 * x))
+  .then(consol
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>30 seconds of code</title>
+    <link href="https://jacob1811.github.io/blog/2020/01/11/30-seconds-of-code/"/>
+    <id>https://jacob1811.github.io/blog/2020/01/11/30-seconds-of-code/</id>
+    <published>2020-01-10T16:35:20.000Z</published>
+    <updated>2020-01-10T16:55:13.380Z</updated>
+    
+    <content type="html"><![CDATA[<p>[中文]<a href="https://www.html.cn/30-seconds-of-code/#coalescefactory" target="_blank" rel="noopener">https://www.html.cn/30-seconds-of-code/#coalescefactory</a><br><a href="https://www.30secondsofcode.org/js/t/adapter/p/1/" target="_blank" rel="noopener">英文</a></p><h3 id="Adapter"><a href="#Adapter" class="headerlink" title="Adapter"></a>Adapter</h3><h4 id="call"><a href="#call" class="headerlink" title="call"></a>call</h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;[中文]&lt;a href=&quot;https://www.html.cn/30-seconds-of-code/#coalescefactory&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.html.cn/30-seconds-of-co
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>vue项目最佳实践</title>
@@ -291,16 +361,15 @@
     <link href="https://jacob1811.github.io/blog/2019/11/18/react%E4%BC%98%E5%8C%96/"/>
     <id>https://jacob1811.github.io/blog/2019/11/18/react优化/</id>
     <published>2019-11-18T11:32:23.000Z</published>
-    <updated>2019-12-27T07:04:30.336Z</updated>
+    <updated>2020-01-03T07:12:34.456Z</updated>
     
-    <content type="html"><![CDATA[<p>1、 不要在渲染函数（render）进行不必要的计算<br>比如，数组排序、数组转换、订阅事件、创建事件处理器等，宗旨是不放置太多副作用</p><p>2、 减少不必要的嵌套<br>理性选择工具，比如适当使用原生css、减少react运行时负担。大部分不必要的节点嵌套都是滥用高阶组件/renderProps导致的，只有在必要的时候才使用XXX。<br>替代方案有：props、React Hooks</p><p>3、虚拟列表<br>使用场景：</p><ul><li>无限滚动列表、 grid、表格、下拉列表、spreadsheets</li><li>无限切换的日历或轮播图</li><li>大数据量或者无限嵌套的树</li><li>聊天窗、数据流、时间轴</li><li>…</li></ul><p><a href="https://github.com/bvaughn/react-virtualized" target="_blank" rel="noopener">react-virtualized</a></p><p>antd配合推荐：（精灵使用、有新增hooks方式）</p><p><a href="https://github.com/wubostc/virtualized-table-for-antd" target="_blank" rel="noopener">virtualizedtableforantd</a></p>]]></content>
+    <content type="html"><![CDATA[<p><a href="https://juejin.im/post/5c2ec1776fb9a049e2322412" target="_blank" rel="noopener">react devtools git生成插件</a><br><a href="https://react-devtools-tutorial.now.sh/" target="_blank" rel="noopener">react devtools 使用指南</a><br>1、 不要在渲染函数（render）进行不必要的计算<br>比如，数组排序、数组转换、订阅事件、创建事件处理器等，宗旨是不放置太多副作用</p><p>2、 减少不必要的嵌套<br>理性选择工具，比如适当使用原生css、减少react运行时负担。大部分不必要的节点嵌套都是滥用高阶组件/renderProps导致的，只有在必要的时候才使用XXX。<br>替代方案有：props、React Hooks</p><p>3、虚拟列表<br>使用场景：</p><ul><li>无限滚动列表、 grid、表格、下拉列表、spreadsheets</li><li>无限切换的日历或轮播图</li><li>大数据量或者无限嵌套的树</li><li>聊天窗、数据流、时间轴</li><li>…</li></ul><p><a href="https://github.com/bvaughn/react-virtualized" target="_blank" rel="noopener">react-virtualized</a></p><p>antd配合推荐：（精灵使用、有新增hooks方式）</p><p><a href="https://github.com/wubostc/virtualized-table-for-antd" target="_blank" rel="noopener">virtualizedtableforantd</a></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;1、 不要在渲染函数（render）进行不必要的计算&lt;br&gt;比如，数组排序、数组转换、订阅事件、创建事件处理器等，宗旨是不放置太多副作用&lt;/p&gt;
-&lt;p&gt;2、 减少不必要的嵌套&lt;br&gt;理性选择工具，比如适当使用原生css、减少react运行时负担。大部分不必要的节点嵌套都是滥
+        &lt;p&gt;&lt;a href=&quot;https://juejin.im/post/5c2ec1776fb9a049e2322412&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;react devtools git生成插件&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://r
       
     
     </summary>
@@ -379,9 +448,9 @@
     <link href="https://jacob1811.github.io/blog/2019/11/01/%22%E5%8D%97%E6%9E%81%22%E7%9A%84%E5%91%BD%E4%BB%A4/"/>
     <id>https://jacob1811.github.io/blog/2019/11/01/&quot;南极&quot;的命令/</id>
     <published>2019-11-01T02:32:02.000Z</published>
-    <updated>2019-12-26T10:50:23.923Z</updated>
+    <updated>2020-01-11T15:45:23.374Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="vscode-命令"><a href="#vscode-命令" class="headerlink" title="vscode 命令"></a>vscode 命令</h3><p>运行js/py:</p><blockquote><p> control + option + N </p></blockquote><h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>屏幕截图：</p><blockquote><p>command + shift + 3/4</p></blockquote><h3 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h3><blockquote><p>tree -I ‘node_module|static’ -L 4</p></blockquote><h3 id="文件夹开权限"><a href="#文件夹开权限" class="headerlink" title="文件夹开权限"></a>文件夹开权限</h3><h3 id="删除无效git分支"><a href="#删除无效git分支" class="headerlink" title="删除无效git分支"></a>删除无效git分支</h3><blockquote><p>查看 git remote show origin</p></blockquote><blockquote><p>删除 git remote prune origin</p></blockquote><h3 id="当需要开启文件夹权限"><a href="#当需要开启文件夹权限" class="headerlink" title="当需要开启文件夹权限:"></a>当需要开启文件夹权限:</h3><blockquote><p>sudo chown -R $USER /data/db</p></blockquote><blockquote><p>sudo chown -R $USER /tmp/</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h3 id="vscode-命令"><a href="#vscode-命令" class="headerlink" title="vscode 命令"></a>vscode 命令</h3><p>运行js/py:</p><blockquote><p> control + option + N </p></blockquote><h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>屏幕截图：</p><blockquote><p>command + shift + 3/4</p></blockquote><h3 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h3><blockquote><p>tree -I ‘node_module|static’ -L 4</p></blockquote><h3 id="文件夹开权限"><a href="#文件夹开权限" class="headerlink" title="文件夹开权限"></a>文件夹开权限</h3><h3 id="删除无效git分支"><a href="#删除无效git分支" class="headerlink" title="删除无效git分支"></a>删除无效git分支</h3><blockquote><p>查看 git remote show origin</p></blockquote><blockquote><p>删除 git remote prune origin</p></blockquote><h3 id="当需要开启文件夹权限"><a href="#当需要开启文件夹权限" class="headerlink" title="当需要开启文件夹权限:"></a>当需要开启文件夹权限:</h3><blockquote><p>sudo chown -R $USER /data/db</p></blockquote><blockquote><p>sudo chown -R $USER /tmp/</p></blockquote><h3 id="打开浏览器控制台"><a href="#打开浏览器控制台" class="headerlink" title="打开浏览器控制台"></a>打开浏览器控制台</h3><blockquote><p>Mac: Option+Command+J</p></blockquote><blockquote><p>Win/Linux: f12 或 Ctrl+Shif+I</p></blockquote>]]></content>
     
     <summary type="html">
     
@@ -427,32 +496,6 @@
       <category term="js" scheme="https://jacob1811.github.io/blog/tags/js/"/>
     
       <category term="css" scheme="https://jacob1811.github.io/blog/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo-config</title>
-    <link href="https://jacob1811.github.io/blog/2019/11/01/hexo-config/"/>
-    <id>https://jacob1811.github.io/blog/2019/11/01/hexo-config/</id>
-    <published>2019-10-31T22:09:07.025Z</published>
-    <updated>2019-11-27T08:07:30.259Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h3 id="官网地址"><a href="#官网地址" class="headerlink" title="官网地址"></a>官网地址</h3><p><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo官网</a></p><h3 id="blog"><a href="#blog" class="headerlink" title="blog"></a>blog</h3><p><a href="http://jeffyang.top/Hexo/Hexo%E4%B8%BB%E9%A2%98Next%E7%BE%8E%E5%8C%96/" target="_blank" rel="noopener">Hexo config blog</a></p><h3 id="炫酷配置"><a href="#炫酷配置" class="headerlink" title="炫酷配置"></a>炫酷配置</h3><p><a href="https://www.jianshu.com/p/f054333ac9e6" target="_blank" rel="noopener">Hexo炫酷配置</a></p><h3 id="next-themes"><a href="#next-themes" class="headerlink" title="next themes"></a>next themes</h3><p><a href="https://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">next配置</a></p><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server </span><br><span class="line">// 简写</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line"></span><br><span class="line">// 简写</span><br><span class="line"></span><br><span class="line">$ hexo g</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy  </span><br><span class="line"></span><br><span class="line">// 简写</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
-    
-    </summary>
-    
-    
-      <category term="Hexo" scheme="https://jacob1811.github.io/blog/categories/Hexo/"/>
-    
-    
-      <category term="doc" scheme="https://jacob1811.github.io/blog/tags/doc/"/>
     
   </entry>
   
