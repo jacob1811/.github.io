@@ -99,32 +99,6 @@
   </entry>
   
   <entry>
-    <title>test</title>
-    <link href="https://jacob1811.github.io/blog/2020/01/11/test/"/>
-    <id>https://jacob1811.github.io/blog/2020/01/11/test/</id>
-    <published>2020-01-10T16:36:44.623Z</published>
-    <updated>2020-01-10T16:39:41.065Z</updated>
-    
-    <content type="html"><![CDATA[const call = (key, ...args) => context => context[key](...args);Promise.resolve([1, 2, 3])  .then(call('map', x => 2 * x))  .then(console.log); //[ 2, 4, 6 ]const map = call.bind(null, 'map');Promise.resolve([1, 2, 3])  .then(map(x => 2 * x))  .then(console.log); //[ 2, 4, 6 ]]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        
-const call = (key, ...args) =&gt; context =&gt; context[key](...args);
-Promise.resolve([1, 2, 3])
-  .then(call(&#39;map&#39;, x =&gt; 2 * x))
-  .then(consol
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>30 seconds of code</title>
     <link href="https://jacob1811.github.io/blog/2020/01/11/30-seconds-of-code/"/>
     <id>https://jacob1811.github.io/blog/2020/01/11/30-seconds-of-code/</id>
@@ -481,6 +455,25 @@ Promise.resolve([1, 2, 3])
     </summary>
     
     
+    
+  </entry>
+  
+  <entry>
+    <title>python-base</title>
+    <link href="https://jacob1811.github.io/blog/2019/11/10/python-base/"/>
+    <id>https://jacob1811.github.io/blog/2019/11/10/python-base/</id>
+    <published>2019-11-10T13:00:54.000Z</published>
+    <updated>2019-11-15T11:03:09.351Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://jacob1811.github.io/blog/categories/python/"/>
+    
+    
+      <category term="base" scheme="https://jacob1811.github.io/blog/tags/base/"/>
     
   </entry>
   
