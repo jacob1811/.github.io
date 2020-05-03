@@ -81,15 +81,18 @@
 
 
 
-<meta name="description" content="[中文]https:&#x2F;&#x2F;www.html.cn&#x2F;30-seconds-of-code&#x2F;#coalescefactory英文 Adaptercall">
+<meta name="description" content="React 源码解析(copy from https:&#x2F;&#x2F;react.jokcy.me) 本文档的内容基本已经完成了，会以文档的形式继续更新，持续完善内容。 在开始想写本书之前，我已经花了将近一个月的时间阅读 React 的源码，在真正做之前，我一直觉得这不会是一件很难的事情，但是到真正开始阅读之后，我才发现，事情并没有我想的那么简单。 阅读源码的关键是你要去猜一开始开发者为什么会这么去设计，而一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="30 seconds of code">
-<meta property="og:url" content="https:&#x2F;&#x2F;jacob1811.github.io&#x2F;blog&#x2F;2020&#x2F;01&#x2F;11&#x2F;30-seconds-of-code&#x2F;index.html">
+<meta property="og:title" content="react-source&#x2F;首页">
+<meta property="og:url" content="https:&#x2F;&#x2F;jacob1811.github.io&#x2F;blog&#x2F;2020&#x2F;05&#x2F;03&#x2F;react-source&#x2F;%E9%A6%96%E9%A1%B5&#x2F;index.html">
 <meta property="og:site_name" content="芸豆blog">
-<meta property="og:description" content="[中文]https:&#x2F;&#x2F;www.html.cn&#x2F;30-seconds-of-code&#x2F;#coalescefactory英文 Adaptercall">
+<meta property="og:description" content="React 源码解析(copy from https:&#x2F;&#x2F;react.jokcy.me) 本文档的内容基本已经完成了，会以文档的形式继续更新，持续完善内容。 在开始想写本书之前，我已经花了将近一个月的时间阅读 React 的源码，在真正做之前，我一直觉得这不会是一件很难的事情，但是到真正开始阅读之后，我才发现，事情并没有我想的那么简单。 阅读源码的关键是你要去猜一开始开发者为什么会这么去设计，而一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-10T16:55:13.380Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;jacob1811.github.io&#x2F;blog&#x2F;2020&#x2F;05&#x2F;03&#x2F;react-source&#x2F;%E9%A6%96%E9%A1%B5&#x2F;image&#x2F;scheduler-fiber-scheduler.png.jpeg">
+<meta property="og:image" content="https:&#x2F;&#x2F;jacob1811.github.io&#x2F;blog&#x2F;2020&#x2F;05&#x2F;03&#x2F;react-source&#x2F;%E9%A6%96%E9%A1%B5&#x2F;image&#x2F;scheduler-render-root.png.jpeg">
+<meta property="og:updated_time" content="2020-05-03T12:06:40.665Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;jacob1811.github.io&#x2F;blog&#x2F;2020&#x2F;05&#x2F;03&#x2F;react-source&#x2F;%E9%A6%96%E9%A1%B5&#x2F;image&#x2F;scheduler-fiber-scheduler.png.jpeg">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://jacob1811.github.io/blog/2020/01/11/30-seconds-of-code/"/>
+  <link rel="canonical" href="https://jacob1811.github.io/blog/2020/05/03/react-source/首页/"/>
 
 
 
 
 
-  <title>30 seconds of code | 芸豆blog</title>
+  <title>react-source/首页 | 芸豆blog</title>
   
 
 
@@ -252,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://jacob1811.github.io/blog/blog/2020/01/11/30-seconds-of-code/">
+    <link itemprop="mainEntityOfPage" href="https://jacob1811.github.io/blog/blog/2020/05/03/react-source/%E9%A6%96%E9%A1%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jacob">
@@ -269,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">30 seconds of code</h1>
+          <h1 class="post-title" itemprop="name headline">react-source/首页</h1>
         
 
         <div class="post-meta">
@@ -281,8 +284,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-11T00:35:20+08:00">
-                2020-01-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-03T19:41:15+08:00">
+                2020-05-03
               </time>
             
 
@@ -319,8 +322,30 @@
       
 
       
-        <p>[中文]<a href="https://www.html.cn/30-seconds-of-code/#coalescefactory" target="_blank" rel="noopener">https://www.html.cn/30-seconds-of-code/#coalescefactory</a><br><a href="https://www.30secondsofcode.org/js/t/adapter/p/1/" target="_blank" rel="noopener">英文</a></p>
-<h3 id="Adapter"><a href="#Adapter" class="headerlink" title="Adapter"></a>Adapter</h3><h4 id="call"><a href="#call" class="headerlink" title="call"></a>call</h4>
+        <p>React 源码解析(copy from <a href="https://react.jokcy.me" target="_blank" rel="noopener">https://react.jokcy.me</a>)</p>
+<p>本文档的内容基本已经完成了，会以文档的形式继续更新，持续完善内容。</p>
+<p>在开始想写本书之前，我已经花了将近一个月的时间阅读 React 的源码，在真正做之前，我一直觉得这不会是一件很难的事情，但是到真正开始阅读之后，我才发现，事情并没有我想的那么简单。</p>
+<p>阅读源码的关键是你要去猜一开始开发者为什么会这么去设计，而一个开源框架和单纯的一个前端项目的代码差距是很大，设计的角度也是非常不同的，你不能用开发项目的思维去考虑一个开源框架的设计初衷。更不用说因为自己眼界的问题，一些之前自己基本没用过代码写法，在源码中看到的时候着实有点一脸懵逼。比如再看到React Fiber中关于TypeOfMode的设计的时候</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> NoContext = <span class="number">0b000</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> AsyncMode = <span class="number">0b001</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> StrictMode = <span class="number">0b010</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> ProfileMode = <span class="number">0b100</span></span><br></pre></td></tr></table></figure>
+<p>一开始根本没有反应过来去考虑这么设计是为了简化类型比较，以及类型复合的方向。如果在以前自己项目开发的时候有接触过一些复合权限系统的设计，那么可能第一眼就能反应过来。</p>
+<p>再比如作为前端开发者，我对于数据结构并没有特别深入学习，所以再看到<code>firstEffect.nextEffect</code>到<code>lastEffect</code>这种单向链表的数据结构设计的时候，一开始也老是把自己搞混，搞不清楚这里面的含义到底是什么。</p>
+<p>在开篇说这些，就是想说一下自己经历这段时间学习 React 的源码得到的一些新的。<code>阅读源码并不只是让你深入的理解一个框架的运作原理，更能让你在一些实现方案上学习到一些更优的方法</code></p>
+<p>在编程世界，我们如果不精进就是退步，不是么？</p>
+<p>回到主题，我总结了一下要理解 React 原理最核心的部分：</p>
+<p>更新机制</p>
+<ul>
+<li>什么是Fiber以及作用</li>
+<li>React 实现路更新任务的调度，如何实现的</li>
+<li>这三项是我认为理解 React 的过程中最困难的部分。</li>
+</ul>
+<p>你现在看到的网站类似于读书笔记，是我一边看代码一遍记下来的，为了方便我采用路Gitbook的Theme Api主题，采用左边记录，右边放置源码的方式。这种方式非常便于阅读源码。</p>
+<p>而同时我也在梳理整体的理念，以尽量少得展示代码来清晰得讲诉 React 的核心原理，对于没有稳定时间用于阅读代码的同学来说，是非常好得学习 React 原理的方式。最终可能会以：</p>
+<p>类似掘金小册<br>视频课程<br>的方式展现出来。这是我花时间精力整理的内容，当然也希望能给自己带来一点利益，如果你愿意为知识付费，那么可以支持一下，具体方式后续会放出。</p>
+<p>当然，本网站永久免费并且会跟随版本持续更新。</p>
+<p>接下来展示一下 React 的调度过程：<br><img src="./image/scheduler-fiber-scheduler.png.jpeg" alt=""></p>
+<p>以及渲染更新的过程<br><img src="./image/scheduler-render-root.png.jpeg" alt=""></p>
+<p>在这个网站你看到的内容会主要围绕着这两者来，这也是 React 当中最复杂的部分。那么话不多说，请继续阅读吧。</p>
+
       
     </div>
     
@@ -344,8 +369,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2019/12/31/vue%E9%A1%B9%E7%9B%AE%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" rel="next" title="vue项目最佳实践">
-                <i class="fa fa-chevron-left"></i> vue项目最佳实践
+              <a href="/blog/2020/04/13/react-source/pre-ready/" rel="next" title="react-source/pre-ready">
+                <i class="fa fa-chevron-left"></i> react-source/pre-ready
               </a>
             
           </div>
@@ -353,10 +378,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2020/01/11/js-deep/" rel="prev" title="js_deep">
-                js_deep <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -408,17 +429,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -501,22 +513,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adapter"><span class="nav-number">1.</span> <span class="nav-text">Adapter</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#call"><span class="nav-number">1.1.</span> <span class="nav-text">call</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
